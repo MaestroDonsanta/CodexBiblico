@@ -1,0 +1,1901 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Codex Bíblico: Sabiduría Universal & Consultor Práctico</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#fdfbf7',
+              100: '#f7f1e3',
+              200: '#eddcb9',
+              300: '#dfc28b',
+              400: '#cda15d',
+              500: '#b8823b',
+              600: '#9e642c',
+              700: '#804a23',
+              800: '#693c1f',
+              900: '#56311b',
+              950: '#1d0f07',
+            },
+            gold: {
+              light: '#fce5b8',
+              DEFAULT: '#d4af37',
+              dark: '#9b6c3e',
+              glow: 'rgba(212, 175, 55, 0.15)'
+            },
+            obsidian: {
+              bg: '#05070a',
+              card: '#0c0f17',
+              border: '#171c28',
+              glow: '#111520'
+            }
+          },
+          fontFamily: {
+            serif: ['Cinzel', 'Georgia', 'serif'],
+            sans: ['Outfit', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          },
+          boxShadow: {
+            'gold-glow': '0 0 25px -5px rgba(212, 175, 55, 0.12)',
+            'gold-glow-intense': '0 0 35px 2px rgba(212, 175, 55, 0.25)',
+            'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Cinzel & Outfit & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&family=Outfit:wght@200;300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Marked.js for AI Markdown rendering -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: #05070a;
+      color: #e2e8f0;
+      overflow-x: hidden;
+    }
+    
+    .font-cinzel { font-family: 'Cinzel', serif; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+    
+    /* Elegant Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #05070a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #171c28;
+      border-radius: 99px;
+      border: 1px solid rgba(212, 175, 55, 0.05);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #cda15d;
+    }
+
+    /* Premium Glassmorphism */
+    .glass-panel {
+      background: rgba(12, 15, 23, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(212, 175, 55, 0.08);
+    }
+    
+    .glass-panel-hover:hover {
+      border-color: rgba(212, 175, 55, 0.25);
+      box-shadow: 0 0 30px -5px rgba(212, 175, 55, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #fce5b8 0%, #d4af37 45%, #c59f6c 75%, #804a23 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .gold-gradient-btn {
+      background: linear-gradient(135deg, #dfc28b 0%, #b8823b 50%, #9e642c 100%);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .gold-gradient-btn:hover {
+      background: linear-gradient(135deg, #f7f1e3 0%, #dfc28b 50%, #b8823b 100%);
+      box-shadow: 0 0 25px 0 rgba(212, 175, 55, 0.35);
+    }
+
+    /* Tab Transition active pill style */
+    .tab-pill-bg {
+      position: absolute;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Markdown styling inside AI Responses */
+    .prose-custom h3 {
+      font-family: 'Cinzel', serif;
+      color: #dfc28b;
+      font-size: 1.2rem;
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+      font-weight: 700;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+      padding-bottom: 0.25rem;
+    }
+    .prose-custom p {
+      margin-bottom: 0.85rem;
+      line-height: 1.7;
+      color: #cbd5e1;
+      font-size: 0.95rem;
+    }
+    .prose-custom ul, .prose-custom ol {
+      padding-left: 1.5rem;
+      margin-bottom: 0.85rem;
+      color: #cbd5e1;
+      font-size: 0.92rem;
+    }
+    .prose-custom ul { list-style-type: disc; }
+    .prose-custom ol { list-style-type: decimal; }
+    .prose-custom li {
+      margin-bottom: 0.4rem;
+    }
+    .prose-custom blockquote {
+      border-left: 3px solid #d4af37;
+      padding: 0.75rem 1rem;
+      margin: 1rem 0;
+      color: #f7f1e3;
+      font-style: italic;
+      background: rgba(212, 175, 55, 0.05);
+      border-radius: 0 0.75rem 0.75rem 0;
+    }
+    .prose-custom strong {
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    /* Hide default scrollbars for tabs */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Audio visualizer bar animation */
+    @keyframes bounce {
+      0%, 100% { height: 4px; }
+      50% { height: 20px; }
+    }
+    .voice-bar {
+      animation: bounce 0.8s ease-in-out infinite;
+    }
+    .voice-bar:nth-child(2) { animation-delay: 0.15s; }
+    .voice-bar:nth-child(3) { animation-delay: 0.3s; }
+    .voice-bar:nth-child(4) { animation-delay: 0.45s; }
+    .voice-bar:nth-child(5) { animation-delay: 0.6s; }
+
+    /* Animated background elements */
+    .glowing-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+      opacity: 0.04;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-brand-500/30 selection:text-brand-200 relative">
+
+  <!-- BACKGROUND DECORATIONS -->
+  <div class="glowing-orb w-[600px] h-[600px] bg-gold -top-80 -left-60"></div>
+  <div class="glowing-orb w-[600px] h-[600px] bg-brand-400 -bottom-80 -right-60"></div>
+  <div class="glowing-orb w-[400px] h-[400px] bg-gold/50 top-1/3 left-1/3"></div>
+
+  <!-- HEADER -->
+  <header class="sticky top-0 z-40 border-b border-obsidian-border/50 glass-panel shadow-md">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+      <!-- Title & Branding -->
+      <div class="flex items-center space-x-3.5 cursor-pointer group" onclick="switchView('codes')">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-700 via-brand-500 to-brand-300 flex items-center justify-center text-obsidian-bg shadow-md shadow-brand-500/10 group-hover:scale-105 transition-transform duration-300 relative overflow-hidden">
+          <div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <i data-lucide="compass" class="w-5 h-5 text-obsidian-bg"></i>
+        </div>
+        <div>
+          <h1 class="font-cinzel font-bold text-lg tracking-wider text-slate-100 flex items-center gap-2">
+            CODEX <span class="text-[10px] px-2 py-0.5 rounded bg-brand-500/10 text-brand-300 border border-brand-500/25 font-sans uppercase font-mono tracking-widest">Bíblico</span>
+          </h1>
+          <p class="text-[10px] text-slate-400 font-mono tracking-widest uppercase">Sabiduría Universal • 66 Libros • Consultor IA</p>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="flex items-center space-x-2.5">
+        <!-- Ambient sound button -->
+        <button id="ambient-btn" onclick="toggleAmbientAudio()" class="px-3 py-1.5 rounded-xl border border-obsidian-border bg-obsidian-card/40 text-slate-300 hover:text-brand-300 hover:border-brand-500/30 text-xs font-mono flex items-center gap-2 transition duration-300 relative group overflow-hidden">
+          <div class="flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-slate-500 group-hover:bg-brand-400" id="ambient-dot"></span>
+            <i data-lucide="waves" class="w-3.5 h-3.5"></i>
+          </div>
+          <span id="ambient-txt" class="hidden sm:inline">Ambiente: Off</span>
+        </button>
+
+        <!-- Share app button -->
+        <button onclick="shareAppUrl()" class="px-3 py-1.5 rounded-xl border border-obsidian-border bg-obsidian-card/40 text-slate-300 hover:text-brand-300 hover:border-brand-500/30 text-xs font-mono flex items-center gap-1.5 transition duration-300">
+          <i data-lucide="share-2" class="w-3.5 h-3.5 text-brand-400"></i>
+          <span class="hidden sm:inline">Compartir</span>
+        </button>
+
+        <!-- Open Settings Modal button -->
+        <button onclick="openSettingsModal()" class="p-2 rounded-xl border border-obsidian-border bg-obsidian-card/40 text-slate-300 hover:text-brand-300 hover:border-brand-500/30 transition duration-300" title="Configurar API de Gemini">
+          <i data-lucide="settings" class="w-4 h-4"></i>
+        </button>
+
+        <!-- Main IA Trigger Button -->
+        <button onclick="switchView('library')" class="px-3.5 py-1.5 rounded-xl border border-brand-500/30 bg-brand-500/10 text-brand-300 hover:bg-brand-500/20 text-xs font-mono flex items-center gap-1.5 transition duration-300 shadow-sm shadow-brand-500/5">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5 text-brand-400 animate-pulse"></i>
+          <span>Consultar IA</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAVIGATION TABS -->
+  <nav class="bg-obsidian-bg/85 border-b border-obsidian-border/50 sticky top-16 z-30 backdrop-blur-md">
+    <div class="max-w-6xl mx-auto px-4 py-3">
+      <div class="relative flex items-center bg-obsidian-card/60 p-1.5 rounded-xl border border-obsidian-border max-w-2xl mx-auto">
+        <div id="tab-indicator" class="absolute h-[calc(100%-12px)] rounded-lg bg-brand-500/15 border border-brand-500/30 transition-all duration-300 ease-out" style="left: 6px; width: 175px;"></div>
+        
+        <button onclick="switchView('codes')" id="tab-btn-codes" class="relative z-10 flex-1 py-2 text-center text-xs font-medium transition duration-300 flex items-center justify-center gap-2 text-brand-300">
+          <i data-lucide="layers" class="w-3.5 h-3.5"></i> <span class="hidden sm:inline">Los 13</span> Códigos Maestros
+        </button>
+        <button onclick="switchView('library')" id="tab-btn-library" class="relative z-10 flex-1 py-2 text-center text-xs font-medium transition duration-300 flex items-center justify-center gap-2 text-slate-400 hover:text-slate-200">
+          <i data-lucide="book-marked" class="w-3.5 h-3.5"></i> Consultor <span class="hidden sm:inline">&amp; 66 Libros</span>
+        </button>
+        <button onclick="switchView('oracle')" id="tab-btn-oracle" class="relative z-10 flex-1 py-2 text-center text-xs font-medium transition duration-300 flex items-center justify-center gap-2 text-slate-400 hover:text-slate-200">
+          <i data-lucide="crosshair" class="w-3.5 h-3.5"></i> Oráculo <span class="hidden sm:inline">de Decisiones</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN MAIN CONTAINER -->
+  <main class="flex-1 max-w-6xl w-full mx-auto px-4 py-8 z-10 relative">
+
+    <!-- WARNING IF GEMINI KEY NOT CONFIGURED -->
+    <div id="api-key-warning" class="hidden mb-6 p-4 rounded-xl border border-amber-500/20 bg-amber-500/5 text-amber-300 flex flex-col sm:flex-row items-center justify-between gap-4 animate-fade-in">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-lg bg-amber-500/10 flex items-center justify-center shrink-0">
+          <i data-lucide="alert-triangle" class="w-5 h-5 text-amber-400"></i>
+        </div>
+        <div>
+          <h4 class="text-sm font-semibold text-slate-100">API Key de Gemini no configurada</h4>
+          <p class="text-xs text-slate-400">Para chatear con la IA y analizar pasajes, necesitas ingresar una clave API gratuita.</p>
+        </div>
+      </div>
+      <button onclick="openSettingsModal()" class="px-3.5 py-1.5 rounded-lg bg-amber-500 text-obsidian-bg font-bold text-xs hover:bg-amber-400 transition shrink-0">
+        Configurar Clave
+      </button>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- VIEW 1: LOS 13 CÓDIGOS MAESTROS -->
+    <!-- ========================================================================= -->
+    <section id="view-codes" class="space-y-8">
+      <!-- Title banner -->
+      <div class="glass-panel p-6 sm:p-8 rounded-2xl border border-obsidian-border shadow-gold-glow relative overflow-hidden">
+        <div class="absolute right-0 top-0 w-1/3 h-full bg-gradient-to-l from-brand-500/10 via-transparent to-transparent pointer-events-none"></div>
+        <div class="max-w-3xl space-y-3 relative z-10">
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-500/10 text-brand-300 text-xs font-mono border border-brand-500/20">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-brand-400"></i> Filosofía Práctica &amp; Leyes Universales
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-cinzel font-bold text-slate-100">Los 13 Códigos: Sabiduría Integrada</h2>
+          <p class="text-slate-400 text-sm leading-relaxed max-w-2xl">
+            Interpretación secular y rigurosa que destila pasajes clave de las escrituras en principios psicológicos de reciprocidad, resiliencia mental, enfoque estratégico y maestría de vida.
+          </p>
+        </div>
+      </div>
+
+      <!-- Filters & Search -->
+      <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
+        <div class="relative w-full md:w-80">
+          <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5"></i>
+          <input type="text" id="codes-search" placeholder="Buscar principio, pasaje o cita..." oninput="filterCodes()" class="w-full pl-10 pr-4 py-2.5 bg-obsidian-card/60 border border-obsidian-border rounded-xl text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-brand-500/50 transition">
+        </div>
+        
+        <!-- Categories tabs -->
+        <div class="flex gap-2 w-full md:w-auto overflow-x-auto no-scrollbar pb-1 text-xs">
+          <button onclick="setCategoryFilter('all', this)" class="cat-btn active px-3.5 py-2 rounded-lg border border-brand-500/30 bg-brand-500/15 text-brand-300 font-medium transition shrink-0">Todos (13)</button>
+          <button onclick="setCategoryFilter('mente', this)" class="cat-btn px-3.5 py-2 rounded-lg border border-obsidian-border bg-obsidian-card/60 text-slate-400 hover:text-slate-200 transition shrink-0">Mentalidad</button>
+          <button onclick="setCategoryFilter('accion', this)" class="cat-btn px-3.5 py-2 rounded-lg border border-obsidian-border bg-obsidian-card/60 text-slate-400 hover:text-slate-200 transition shrink-0">Acción &amp; Foco</button>
+          <button onclick="setCategoryFilter('relaciones', this)" class="cat-btn px-3.5 py-2 rounded-lg border border-obsidian-border bg-obsidian-card/60 text-slate-400 hover:text-slate-200 transition shrink-0">Relaciones &amp; Ética</button>
+        </div>
+      </div>
+
+      <!-- Codes Grid -->
+      <div id="codes-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- JS rendered cards -->
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- VIEW 2: CONSULTOR BÍBLICO & LOS 66 LIBROS -->
+    <!-- ========================================================================= -->
+    <section id="view-library" class="hidden space-y-8">
+      
+      <!-- AI Engine Container -->
+      <div class="glass-panel p-6 sm:p-8 rounded-2xl border border-brand-500/20 shadow-gold-glow space-y-6">
+        <div class="space-y-2">
+          <span class="inline-flex items-center gap-1.5 text-[11px] font-mono text-brand-400 uppercase tracking-widest">
+            <i data-lucide="cpu" class="w-3.5 h-3.5"></i> Motor de Sabiduría AI
+          </span>
+          <h2 class="text-3xl font-cinzel font-bold text-slate-100">Consultor de Vida &amp; Filosofía Práctica</h2>
+          <p class="text-slate-400 text-sm leading-relaxed max-w-3xl">
+            Ingresa un dilema humano moderno (ansiedad, toma de decisiones, resiliencia), el nombre de un personaje o un pasaje específico. La inteligencia artificial decodificará el principio psicológico subyacente y un protocolo práctico de acción.
+          </p>
+        </div>
+
+        <!-- Query input area -->
+        <div class="space-y-4">
+          <div class="relative flex flex-col sm:flex-row gap-2.5">
+            <div class="relative flex-1">
+              <i data-lucide="sparkles" class="w-4 h-4 text-brand-400 absolute left-3.5 top-4"></i>
+              <input type="text" id="bible-ai-query" 
+                     placeholder="Ej: 'Filipenses 4:6 (Ansiedad)', 'El dilema de Jonás', '¿Cómo liderar en tiempos de crisis?'..." 
+                     class="w-full pl-10 pr-4 py-3.5 bg-obsidian-bg border border-obsidian-border rounded-xl text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-500 transition shadow-inner"
+                     onkeydown="if(event.key === 'Enter') askBibleConsultant()">
+            </div>
+            <button onclick="askBibleConsultant()" id="ai-search-btn" class="gold-gradient-btn px-6 py-3.5 text-obsidian-bg font-bold text-sm rounded-xl flex items-center justify-center gap-2 shrink-0">
+              <i data-lucide="sparkles" class="w-4 h-4"></i> Analizar &amp; Decodificar
+            </button>
+          </div>
+
+          <!-- Quick badges suggestions -->
+          <div class="flex flex-wrap items-center gap-2 text-xs">
+            <span class="text-slate-500 font-mono text-[11px]">Temas sugeridos:</span>
+            <button onclick="quickAsk('Salmo 23: Interpretación de la calma frente al caos')" class="px-3 py-1.5 rounded-lg bg-obsidian-card/60 hover:bg-brand-500/10 border border-obsidian-border hover:border-brand-500/30 text-slate-300 text-[11px] transition">Salmo 23 (Calma mental)</button>
+            <button onclick="quickAsk('Eclesiastés 3: Adaptarse al cambio y al factor tiempo')" class="px-3 py-1.5 rounded-lg bg-obsidian-card/60 hover:bg-brand-500/10 border border-obsidian-border hover:border-brand-500/30 text-slate-300 text-[11px] transition">Eclesiastés 3 (Tiempos)</button>
+            <button onclick="quickAsk('Nehemías 4: Persistir y coordinar equipos ante la crítica')" class="px-3 py-1.5 rounded-lg bg-obsidian-card/60 hover:bg-brand-500/10 border border-obsidian-border hover:border-brand-500/30 text-slate-300 text-[11px] transition">Nehemías (Críticas)</button>
+            <button onclick="quickAsk('Mateo 6:25-34: El Sermón del monte y la superación de la escasez')" class="px-3 py-1.5 rounded-lg bg-obsidian-card/60 hover:bg-brand-500/10 border border-obsidian-border hover:border-brand-500/30 text-slate-300 text-[11px] transition">Sermón del Monte</button>
+          </div>
+        </div>
+
+        <!-- Dynamic loader -->
+        <div id="ai-loading" class="hidden py-12 flex flex-col items-center justify-center space-y-4">
+          <div class="relative w-12 h-12 flex items-center justify-center">
+            <div class="w-12 h-12 border-2 border-brand-500/20 border-t-brand-500 rounded-full animate-spin absolute"></div>
+            <i data-lucide="scroll" class="w-5 h-5 text-brand-400 animate-pulse"></i>
+          </div>
+          <div class="text-center space-y-1">
+            <p class="text-xs font-mono text-brand-300" id="loading-message">Iniciando decodificación...</p>
+            <p class="text-[10px] text-slate-500">Buscando arquetipos y aplicando principios prácticos...</p>
+          </div>
+        </div>
+
+        <!-- AI Result presentation (Redesigned structured view) -->
+        <div id="ai-result-box" class="hidden space-y-5 border-t border-obsidian-border/80 pt-6">
+          <div class="flex items-center justify-between border-b border-obsidian-border pb-3.5">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-brand-400 animate-ping"></span>
+              <h3 class="font-cinzel font-bold text-base text-brand-300" id="ai-result-title">Exégesis Aplicada</h3>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="copyCurrentConsultation()" class="px-3 py-1.5 rounded-lg bg-obsidian-card/60 border border-obsidian-border hover:border-brand-500/30 text-slate-300 text-xs font-mono flex items-center gap-1.5 transition">
+                <i data-lucide="copy" class="w-3.5 h-3.5 text-brand-400"></i> Copiar
+              </button>
+              <button id="ai-listen-btn" onclick="speakConsultationText()" class="px-3 py-1.5 rounded-lg bg-obsidian-card/60 border border-obsidian-border hover:border-brand-500/30 text-slate-300 text-xs font-mono flex items-center gap-1.5 transition">
+                <i data-lucide="volume-2" class="w-3.5 h-3.5 text-brand-400"></i> Escuchar
+              </button>
+            </div>
+          </div>
+          
+          <!-- Structured content grid injected by JS, fallback to HTML if parsing fails -->
+          <div id="ai-result-content" class="space-y-4">
+            <!-- Dynamic parsed blocks -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Library of Books -->
+      <div class="space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-obsidian-border pb-4">
+          <div>
+            <h3 class="text-2xl font-cinzel font-bold text-slate-100">Biblioteca Temática</h3>
+            <p class="text-xs text-slate-400">Accede a los libros filtrados según su enfoque estratégico y práctico.</p>
+          </div>
+          <div class="relative w-full sm:w-72 shrink-0">
+            <input type="text" id="book-search-input" placeholder="Buscar libro (Ej: Proverbios)..." oninput="filterBooks()" class="w-full pl-9 pr-3.5 py-2 bg-obsidian-card/60 border border-obsidian-border rounded-xl text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-brand-500/50 transition">
+            <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-3"></i>
+          </div>
+        </div>
+
+        <!-- Pillar filter buttons -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3" id="pillar-buttons">
+          <button onclick="selectPillar('all', this)" class="pillar-tab active p-3.5 rounded-xl bg-brand-500/10 border border-brand-500/35 text-left transition flex items-center justify-between">
+            <div>
+              <p class="text-xs font-bold text-slate-200">Todos los Libros</p>
+              <span class="text-[10px] font-mono text-brand-400">Curación selectiva</span>
+            </div>
+            <i data-lucide="library" class="w-5 h-5 text-brand-400"></i>
+          </button>
+          
+          <button onclick="selectPillar('sabiduria', this)" class="pillar-tab p-3.5 rounded-xl bg-obsidian-card/60 border border-obsidian-border text-left hover:border-brand-500/20 transition flex items-center justify-between">
+            <div>
+              <p class="text-xs font-bold text-slate-200">1. Mente &amp; Sabiduría</p>
+              <span class="text-[10px] font-mono text-amber-500">Filosofía y templanza</span>
+            </div>
+            <i data-lucide="brain" class="w-5 h-5 text-amber-500"></i>
+          </button>
+
+          <button onclick="selectPillar('liderazgo', this)" class="pillar-tab p-3.5 rounded-xl bg-obsidian-card/60 border border-obsidian-border text-left hover:border-brand-500/20 transition flex items-center justify-between">
+            <div>
+              <p class="text-xs font-bold text-slate-200">2. Liderazgo &amp; Crisis</p>
+              <span class="text-[10px] font-mono text-emerald-500">Estrategias en la tempestad</span>
+            </div>
+            <i data-lucide="shield" class="w-5 h-5 text-emerald-500"></i>
+          </button>
+
+          <button onclick="selectPillar('evangelios', this)" class="pillar-tab p-3.5 rounded-xl bg-obsidian-card/60 border border-obsidian-border text-left hover:border-brand-500/20 transition flex items-center justify-between">
+            <div>
+              <p class="text-xs font-bold text-slate-200">3. Evangelios &amp; Maestría</p>
+              <span class="text-[10px] font-mono text-sky-500">El Camino del Autocontrol</span>
+            </div>
+            <i data-lucide="sun" class="w-5 h-5 text-sky-500"></i>
+          </button>
+        </div>
+
+        <!-- Books Grid -->
+        <div id="books-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4.5 pt-2">
+          <!-- JS dynamic content -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- VIEW 3: ORÁCULO DE SITUACIONES (PROBLEM SOLVER) -->
+    <!-- ========================================================================= -->
+    <section id="view-oracle" class="hidden space-y-6 animate-fade-in">
+      <div class="glass-panel p-6 sm:p-8 rounded-2xl border border-obsidian-border space-y-5">
+        <div class="max-w-2xl space-y-2">
+          <span class="text-xs font-mono text-brand-400 tracking-widest uppercase">Discernimiento Rápido</span>
+          <h2 class="text-3xl font-cinzel font-bold text-slate-100">Oráculo de Desafíos &amp; Decisiones</h2>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Identifica el bloqueo que experimentas en tu vida o proyecto hoy. El Codex ofrece arquetipos estratégicos y guías paso a paso validadas históricamente.
+          </p>
+        </div>
+
+        <!-- Selection Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-4" id="situations-container">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Oracle results panel -->
+      <div id="oracle-result" class="hidden">
+        <!-- Generated template dynamically -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL: DETALLES DE CÓDIGOS / LIBROS -->
+  <div id="modal-container" class="fixed inset-0 z-50 bg-obsidian-bg/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="glass-panel w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl border border-brand-500/20 p-6 sm:p-8 relative space-y-5 shadow-gold-glow-intense transition-all duration-300 scale-95 opacity-0" id="modal-box">
+      <!-- Close button -->
+      <button onclick="closeModal()" class="absolute right-5 top-5 p-2 rounded-xl bg-obsidian-card text-slate-400 hover:text-slate-100 hover:border hover:border-brand-500/20 transition">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+
+      <div id="modal-content">
+        <!-- Injected dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: SETTINGS (API Key & Model Config) -->
+  <div id="settings-modal" class="fixed inset-0 z-50 bg-obsidian-bg/85 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="glass-panel w-full max-w-md rounded-2xl border border-brand-500/30 p-6 relative space-y-5 shadow-gold-glow-intense">
+      <button onclick="closeSettingsModal()" class="absolute right-5 top-5 p-2 rounded-xl bg-obsidian-card text-slate-400 hover:text-slate-100 hover:border hover:border-brand-500/20 transition">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+
+      <div class="space-y-2">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-brand-500/10 flex items-center justify-center">
+            <i data-lucide="settings" class="w-4 h-4 text-brand-300"></i>
+          </div>
+          <h3 class="text-xl font-cinzel font-bold text-slate-100">Configuración</h3>
+        </div>
+        <p class="text-xs text-slate-400">Ajusta los parámetros del motor de IA de Gemini.</p>
+      </div>
+
+      <div class="space-y-4 pt-2">
+        <!-- API Key Input -->
+        <div class="space-y-2">
+          <label class="text-xs font-mono text-brand-300 uppercase block">Clave API de Gemini</label>
+          <div class="relative">
+            <input type="password" id="input-api-key" placeholder="AIzaSy..." class="w-full pl-3 pr-10 py-2.5 bg-obsidian-bg border border-obsidian-border rounded-xl text-sm font-mono text-slate-200 focus:outline-none focus:border-brand-500">
+            <button onclick="toggleApiKeyVisibility()" class="absolute right-3 top-3 text-slate-500 hover:text-slate-300">
+              <i data-lucide="eye" class="w-4 h-4" id="eye-icon"></i>
+            </button>
+          </div>
+          
+          <!-- Step by step guide for non-programmers -->
+          <div class="bg-obsidian-bg/80 p-3 rounded-xl border border-obsidian-border/80 space-y-2 text-[11px] text-slate-300">
+            <p class="font-bold text-brand-300 flex items-center gap-1">
+              <i data-lucide="help-circle" class="w-3.5 h-3.5"></i> ¿Cómo obtener tu clave gratis en 1 minuto?
+            </p>
+            <ol class="list-decimal pl-4 space-y-1 text-slate-400">
+              <li>Entra a 
+                <a href="https://aistudio.google.com/" target="_blank" class="text-brand-400 hover:underline inline-flex items-center gap-0.5">
+                  Google AI Studio <i data-lucide="external-link" class="w-2.5 h-2.5"></i>
+                </a> e inicia sesión con tu Gmail.
+              </li>
+              <li>Toca el botón azul <strong>"Get API Key"</strong> (Obtener clave).</li>
+              <li>Selecciona <strong>"Create API Key"</strong> (Crear clave), cópiala.</li>
+              <li>Pégala en el cuadro de texto de arriba y pulsa "Guardar".</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Model Selection -->
+        <div class="space-y-1.5">
+          <label class="text-xs font-mono text-brand-300 uppercase block">Modelo de Inteligencia Artificial</label>
+          <select id="select-model" onchange="handleModelChange()" class="w-full px-3 py-2.5 bg-obsidian-bg border border-obsidian-border rounded-xl text-xs text-slate-200 focus:outline-none focus:border-brand-500 font-mono">
+            <option value="gemini-3.6-flash">gemini-3.6-flash (Recomendado - Veloz)</option>
+            <option value="gemini-2.5-flash">gemini-2.5-flash (Obsoleto)</option>
+            <option value="gemini-1.5-flash">gemini-1.5-flash (Estable)</option>
+            <option value="gemini-2.0-flash">gemini-2.0-flash (General)</option>
+            <option value="gemini-1.5-pro">gemini-1.5-pro (Máximo Análisis)</option>
+            <option value="custom">Otro modelo...</option>
+          </select>
+        </div>
+
+        <!-- Custom Model Input (Hidden by default) -->
+        <div class="space-y-1.5 hidden" id="custom-model-box">
+          <label class="text-xs font-mono text-slate-400 uppercase block">Nombre de Modelo Personalizado</label>
+          <input type="text" id="input-custom-model" placeholder="ej. gemini-2.5-pro" class="w-full px-3 py-2 bg-obsidian-bg border border-obsidian-border rounded-xl text-xs font-mono text-slate-200 focus:outline-none focus:border-brand-500 font-mono">
+        </div>
+      </div>
+
+      <div class="pt-4 flex justify-end gap-2.5">
+        <button onclick="closeSettingsModal()" class="px-4 py-2 rounded-xl bg-obsidian-card border border-obsidian-border hover:border-brand-500/20 text-xs font-semibold text-slate-400 transition">
+          Cancelar
+        </button>
+        <button onclick="saveSettings()" class="gold-gradient-btn px-5 py-2 text-obsidian-bg font-bold text-xs rounded-xl shadow-lg shadow-brand-500/10">
+          Guardar Cambios
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOATING VOICE READER TOAST (RECONSTRUCTED) -->
+  <div id="voice-toast" class="fixed bottom-6 right-6 z-40 bg-obsidian-card border border-brand-500/40 p-4 rounded-xl shadow-2xl flex items-center gap-4 hidden transition-all duration-300 hover:border-brand-500/70 max-w-sm">
+    <!-- Animated sound waves -->
+    <div class="flex items-end gap-0.5 h-5 shrink-0" id="soundwave-container">
+      <div class="w-1 bg-brand-400 rounded-full voice-bar"></div>
+      <div class="w-1 bg-brand-400 rounded-full voice-bar"></div>
+      <div class="w-1 bg-brand-400 rounded-full voice-bar"></div>
+      <div class="w-1 bg-brand-400 rounded-full voice-bar"></div>
+      <div class="w-1 bg-brand-400 rounded-full voice-bar"></div>
+    </div>
+    
+    <div class="flex-1 min-w-0">
+      <span class="text-[11px] font-mono text-brand-300 block uppercase tracking-wider">Audio Narración</span>
+      <p class="text-xs text-slate-200 truncate" id="voice-toast-text">Leyendo principio...</p>
+    </div>
+
+    <div class="flex items-center gap-1.5 shrink-0 border-l border-obsidian-border pl-3">
+      <!-- Play/Pause Toggle -->
+      <button onclick="toggleSpeechPause()" class="p-1 text-slate-400 hover:text-brand-300" id="btn-pause-speech" title="Pausar / Reanudar">
+        <i data-lucide="pause" class="w-4 h-4" id="speech-pause-icon"></i>
+      </button>
+      <!-- Stop Button -->
+      <button onclick="stopSpeaking()" class="p-1 text-slate-400 hover:text-rose-400" title="Detener">
+        <i data-lucide="square" class="w-4 h-4"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="action-toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-obsidian-card border border-brand-500/40 px-5 py-3 rounded-2xl text-xs font-mono text-brand-200 shadow-2xl hidden flex items-center gap-2.5 animate-bounce">
+    <div class="w-5 h-5 rounded-full bg-emerald-500/10 flex items-center justify-center shrink-0">
+      <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400"></i>
+    </div>
+    <span id="toast-text">Texto copiado con éxito</span>
+  </div>
+
+  <script>
+    // Local API & Model Storage Management
+    let apiKey = localStorage.getItem('gemini_api_key') || "";
+    let selectedModel = localStorage.getItem('gemini_model') || "gemini-3.6-flash";
+    if (selectedModel === "gemini-2.5-flash") {
+      selectedModel = "gemini-3.6-flash";
+      localStorage.setItem('gemini_model', selectedModel);
+    }
+
+    // 13 CODES DATABASE - REFINED
+    const CODEX_DATA = [
+      {
+        id: 1,
+        codeNum: "CÓDIGO 01",
+        title: "La Reciprocidad Sistémica",
+        category: "relaciones",
+        bibleQuote: "«Dad, y se os dará... porque con la misma medida con que medís, os volverán a medir.»",
+        bibleRef: "Lucas 6:38",
+        psychologicalMeaning: "Principio de Causa y Efecto y Reciprocidad Social. Lo que aportas a tu entorno, a tus relaciones y a tus proyectos establece el estándar de lo que el sistema te devuelve. Quien actúa con escasez cosecha desconfianza; quien entrega valor genuino genera retornos acumulativos.",
+        practicalAction: "En tus interacciones y responsabilidades, entrega un margen extra de calidad, atención o valor antes de esperar retribuciones. Establece con tus acciones el nivel de trato que deseas recibir.",
+        keyConcept: "Ley de Semilla y Cosecha"
+      },
+      {
+        id: 2,
+        codeNum: "CÓDIGO 02",
+        title: "Regulación de la Reactividad",
+        category: "mente",
+        bibleQuote: "«No os preocupéis por vuestra vida. ¿No es la vida más que el alimento, y el cuerpo más que el vestido?»",
+        bibleRef: "Mateo 6:25-26",
+        psychologicalMeaning: "Regulación de la reactividad y visión estratégica. Cuando la mente opera secuestrada por la urgencia y el miedo a la escasez, se toman decisiones de corto plazo que comprometen el futuro. La serenidad interior restaura la claridad de juicio.",
+        practicalAction: "Separa momentos deliberados para reflexionar sin urgencias ni pantallas. Distingue las necesidades reales de los miedos anticipados y concéntrate en construir con visión a largo plazo.",
+        keyConcept: "Claridad Estratégica vs Ansiedad"
+      },
+      {
+        id: 3,
+        codeNum: "CÓDIGO 03",
+        title: "La Evolución de la Identidad",
+        category: "mente",
+        bibleQuote: "«Si el grano de trigo no cae en la tierra y muere, queda solo; pero si muere, lleva mucho fruto.»",
+        bibleRef: "Juan 12:24",
+        psychologicalMeaning: "Evolución personal y desapego de viejas identidades. Para alcanzar una nueva etapa de madurez o maestría, es necesario renunciar a la versión cómoda del pasado y a las etiquetas rígidas de identidad ('siempre he sido así').",
+        practicalAction: "Identifica un hábito, creencia limitante o apego al ego que hoy frena tu avance y decídete a soltarlo para permitir un nuevo aprendizaje.",
+        keyConcept: "Muerte del Ego y Reinvención"
+      },
+      {
+        id: 4,
+        codeNum: "CÓDIGO 04",
+        title: "Certeza Psicológica Previa",
+        category: "mente",
+        bibleQuote: "«Todo lo que pidiereis orando, creed que lo recibiréis, y os vendrá.»",
+        bibleRef: "Marcos 11:24",
+        psychologicalMeaning: "Certeza psicológica y coherencia subconsciente. Emprender una meta dudando internamente genera microdecisiones de autosabotaje. Actuar con la convicción de que el objetivo es posible alinea la postura, el lenguaje y la ejecución.",
+        practicalAction: "Antes de iniciar un proyecto o conversación clave, asume la tranquilidad y solvencia de quien ya domina su propósito. Desecha el lenguaje dubitativo.",
+        keyConcept: "Actitud de Victoria Anticipada"
+      },
+      {
+        id: 5,
+        codeNum: "CÓDIGO 05",
+        title: "Autonomía de Juicio",
+        category: "mente",
+        bibleQuote: "«El reino de Dios está dentro de vosotros.»",
+        bibleRef: "Lucas 17:21",
+        psychologicalMeaning: "Autonomía de juicio e intuición cultivada. La dependencia excesiva de la aprobación o validación ajena apaga la brújula moral e intelectual. La sabiduría profunda reside en cultivar un discernimiento propio e inquebrantable.",
+        practicalAction: "Frente a decisiones importantes, acostumbra consultar tu propio criterio y principios éticos en calma antes de dispersarte pidiendo la opinión de terceros.",
+        keyConcept: "Locus de Control Interno"
+      },
+      {
+        id: 6,
+        codeNum: "CÓDIGO 06",
+        title: "Responsabilidad Proyectiva",
+        category: "relaciones",
+        bibleQuote: "«Saca primero la viga de tu propio ojo, y entonces verás bien para sacar la paja del ojo de tu hermano.»",
+        bibleRef: "Mateo 7:5",
+        psychologicalMeaning: "Proyección psicológica y autorresponsabilidad radical. Con frecuencia, los defectos que más irritan de los demás constituyen un reflejo de inconsistencias o debilidades propias no examinadas.",
+        practicalAction: "Cuando sientas el impulso de criticar o juzgar duramente a alguien, haz una pausa y evalúa: '¿En qué área de mi propia vida estoy cometiendo una falta semejante?'",
+        keyConcept: "Integridad y Autoevaluación"
+      },
+      {
+        id: 7,
+        codeNum: "CÓDIGO 07",
+        title: "Ventaja Acumulativa",
+        category: "accion",
+        bibleQuote: "«Porque al que tiene, le será dado, y tendrá más; y al que no tiene, aun lo que tiene le será quitado.»",
+        bibleRef: "Mateo 25:29",
+        psychologicalMeaning: "El Efecto Mateo y la ley de la práctica compuesta. Las capacidades, dones y oportunidades que no se ejercitan con valentía se atrofian. Aquel que arriesga y pone su talento en circulación multiplica sus posibilidades de éxito.",
+        practicalAction: "No guardes tus mejores ideas esperando condiciones idílicas. Pon en práctica tus habilidades esenciales de forma constante y visible.",
+        keyConcept: "Uso y Flujo de Habilidades"
+      },
+      {
+        id: 8,
+        codeNum: "CÓDIGO 08",
+        title: "Alineación de Fuerza Interna",
+        category: "accion",
+        bibleQuote: "«Todo reino dividido contra sí mismo, es asolado; y toda ciudad o casa dividida contra sí misma, no permanecerá.»",
+        bibleRef: "Mateo 12:25",
+        psychologicalMeaning: "Coherencia interna y eliminación de contradicciones. La fragmentación entre lo que se desea, lo que se piensa y los hábitos cotidianos disipa la energía vital e impide el florecimiento de cualquier empresa.",
+        practicalAction: "Realiza una auditoría personal de coherencia: detecta qué comportamientos diarios contradicen directamente tus valores o metas principales y elimínalos.",
+        keyConcept: "Foco y Coherencia de Hábitos"
+      },
+      {
+        id: 9,
+        codeNum: "CÓDIGO 09",
+        title: "Trascendencia Generacional",
+        category: "accion",
+        bibleQuote: "«Las obras que yo hago, vosotros las haréis también; y aun mayores.»",
+        bibleRef: "Juan 14:12",
+        psychologicalMeaning: "Potencial evolutivo y superación de referentes. El ser humano está llamado no a ser un mero imitador pasivo de sus antecesores, sino a expandir el conocimiento, el servicio y el impacto en su propia época.",
+        practicalAction: "Asume el liderazgo de tus responsabilidades con la ambición sana de crear obras de calidad duradera y servir de apoyo a quienes vienen detrás.",
+        keyConcept: "Expansión del Legado"
+      },
+      {
+        id: 10,
+        codeNum: "CÓDIGO 10",
+        title: "Libertad por Objetividad",
+        category: "mente",
+        bibleQuote: "«Y conoceréis la verdad, y la verdad os hará libres.»",
+        bibleRef: "Juan 8:32",
+        psychologicalMeaning: "Desmantelamiento de falsas creencias y sesgos limitantes. Con conocer la realidad objetiva de los hechos y de las capacidades humanas libera a la mente de los miedos heredados y del engaño social.",
+        practicalAction: "Cuestiona las suposiciones que limitan tus decisiones. Analiza los hechos reales, busca datos verificables y actúa con base en la verdad y no en el temor.",
+        keyConcept: "Verdad y Libertad Cognitiva"
+      },
+      {
+        id: 11,
+        codeNum: "CÓDIGO 11",
+        title: "Concentración en Aislamiento",
+        category: "mente",
+        bibleQuote: "«Mas tú, cuando ores, entra en tu aposento, y cerrada la puerta, ora a tu Padre que está en secreto; y tu Padre que ve en lo secreto te recompensará.»",
+        bibleRef: "Mateo 6:6",
+        psychologicalMeaning: "Concentración profunda (Deep Work) e introspección. Las grandes transformaciones y la auténtica madurez no se construyen para la exhibición pública, sino en la disciplina callada y sin testigos de la mente.",
+        practicalAction: "Establece bloques diarios de trabajo y reflexión en silencio absoluto, sin notificaciones ni necesidad de publicitar lo que estás haciendo hasta que esté terminado.",
+        keyConcept: "Trabajo en Silencio y Foco Profundo"
+      },
+      {
+        id: 12,
+        codeNum: "CÓDIGO 12",
+        title: "Iniciativa Secuencial Proactiva",
+        category: "accion",
+        bibleQuote: "«Pedid, y se os dará; buscad, y hallaréis; llamad, y se os abrirá.»",
+        bibleRef: "Mateo 7:7",
+        psychologicalMeaning: "La jerarquía de la acción proactiva: 1. Claridad de intención (Pedir) -> 2. Exploración activa (Buscar) -> 3. Insistencia y llamado a la acción (Llamar). Las oportunidades son descubiertas por quienes tocan las puertas.",
+        practicalAction: "Cuando persigas un objetivo, no aguardes pasivamente. Define tu meta con precisión, investiga el camino y contacta con determinación a las personas y recursos necesarios.",
+        keyConcept: "Iniciativa de 3 Fases"
+      },
+      {
+        id: 13,
+        codeNum: "CÓDIGO 13",
+        title: "Anclaje de Identidad Central",
+        category: "accion",
+        bibleQuote: "«Permaneced en mí, y yo en vosotros. Como el pámpano no puede llevar fruto por sí mismo, si no permanece en la vid...»",
+        bibleRef: "Juan 15:4",
+        psychologicalMeaning: "Constancia y fidelidad al propósito fundacional. Una rama separada del tronco pierde su vitalidad. Si una persona se desconecta de sus valores éticos, de su bienestar integral y de su propósito esencial, sus logros se vacían.",
+        practicalAction: "Mantén una rutina de cuidado interior y hábitos saludables, aun en periodos de alta demanda o éxito exterior, para sostener la energía a largo plazo.",
+        keyConcept: "Permanecer Fiel al Propósito"
+      }
+    ];
+
+    // THE SELECTED BOOKS
+    const BIBLE_BOOKS = [
+      { name: "Proverbios", pillar: "sabiduria", chapters: 31, theme: "Leyes de Causa y efecto, prudencia operativa y dominio de los impulsos.", keyVerse: "Proverbios 4:23 — Sobre toda cosa guardada, guarda tu mente; porque de ella mana la vida." },
+      { name: "Eclesiastés", pillar: "sabiduria", chapters: 12, theme: "Aceptación del paso del tiempo, desilusión del ego y disfrute del presente.", keyVerse: "Eclesiastés 3:1 — Todo tiene su tiempo, y todo lo que se quiere debajo del cielo tiene su hora." },
+      { name: "Job", pillar: "sabiduria", chapters: 42, theme: "Resiliencia psicológica extrema ante crisis y pérdida de control.", keyVerse: "Job 23:10 — Mas él conoce mi camino; me probará, y saldré como oro." },
+      { name: "Salmos", pillar: "sabiduria", chapters: 150, theme: "Gestión de emociones complejas, catarsis, gratitud y enfoque mental.", keyVerse: "Salmos 46:10 — Estad quietos, y reconoced que la calma es la fuerza." },
+      { name: "Cantares", pillar: "sabiduria", chapters: 8, theme: "Cohesión relacional, intimidad y psicología de la devoción.", keyVerse: "Cantares 8:7 — Las muchas aguas no podrán apagar el amor de verdad." },
+
+      { name: "Génesis", pillar: "liderazgo", chapters: 50, theme: "Orígenes de visión a largo plazo y planificación ante periodos de escasez (José).", keyVerse: "Génesis 50:20 — Vosotros pensasteis hacerme mal, pero la visión estratégica lo encaminó a bien." },
+      { name: "Éxodo", pillar: "liderazgo", chapters: 40, theme: "Salir del modo sumisión/víctima y estructurar un nuevo marco operativo.", keyVerse: "Éxodo 14:14 — Vuestra mente peleará por vosotros, y vosotros estaréis en paz." },
+      { name: "Nehemías", pillar: "liderazgo", chapters: 13, theme: "Liderazgo de proyectos, gestión de crisis y enfoque ante críticas directas.", keyVerse: "Nehemías 6:3 — Estoy haciendo una gran obra, y no puedo bajar a debatir." },
+      { name: "1 y 2 Samuel", pillar: "liderazgo", chapters: 55, theme: "Estrategias de asimetría (David y Goliat) y el peligro del ego en el poder.", keyVerse: "1 Samuel 17:45 — Tú vienes a mí con fuerza bruta, mas yo voy a ti en nombre del propósito." },
+      { name: "Josué", pillar: "liderazgo", chapters: 24, theme: "Audacia de ejecución en la incertidumbre y superación de límites del pasado.", keyVerse: "Josué 1:9 — Esfuérzate y sé valiente; no temas ni desmayes, porque tu camino se abrirá." },
+      { name: "Daniel", pillar: "liderazgo", chapters: 12, theme: "Integridad ante la hostilidad de entornos jerárquicos competitivos.", keyVerse: "Daniel 1:8 — Daniel propuso en su mente no contaminar sus principios." },
+      { name: "Ester", pillar: "liderazgo", chapters: 10, theme: "Oportunidad de tiempo (Timing), diplomacia e iniciativa frente a la amenaza.", keyVerse: "Ester 4:14 — ¿Y quién sabe si precisamente para un momento como este has llegado?" },
+
+      { name: "Mateo", pillar: "evangelios", chapters: 28, theme: "El Sermón del Monte: Manual para la maestría interior y la ética radical.", keyVerse: "Mateo 6:33 — Buscad primero la alineación de principios, y el resto llegará por añadidura." },
+      { name: "Marcos", pillar: "evangelios", chapters: 16, theme: "Ejecución inmediata, pragmatismo, servicio activo y discreción.", keyVerse: "Marcos 10:45 — Porque el mayor impacto no viene de ser servido, sino de servir." },
+      { name: "Lucas", pillar: "evangelios", chapters: 24, theme: "Inclusión social, empatía activa y la fuerza de las parábolas psicológicas.", keyVerse: "Lucas 12:34 — Porque donde esté vuestro foco, allí estará también vuestra fuerza." },
+      { name: "Juan", pillar: "evangelios", chapters: 21, theme: "Metafísica de la intención, soberanía de la palabra y cohesión integradora.", keyVerse: "Juan 8:32 — Y comprenderéis la realidad, y la realidad os dará plena autonomía." },
+      { name: "Hechos", pillar: "evangelios", chapters: 28, theme: "Expansión de movimientos descentralizados y perseverancia cultural.", keyVerse: "Hechos 1:8 — Recibiréis poder cuando la inspiración interna guíe vuestras acciones." }
+    ];
+
+    // ORACLE SITUATIONS
+    const ORACLE_SITUATIONS = [
+      {
+        id: 'block',
+        title: 'Bloqueo Mental o Sequía Creativa',
+        icon: 'lightbulb',
+        biblicalHero: 'El Maná Diario (Éxodo 16)',
+        lesson: 'El hábito de recolectar la ración de un solo día enseñó a no sobrecargarse de ansiedad por provisiones futuras. La creatividad no se resuelve en bloque para toda la vida: se alimenta enfocando la acción de hoy.',
+        steps: [
+          'Aplica el Código 11: Desconéctate y trabaja 30 minutos sin distracciones digitales.',
+          'No juzgues tu borrador; solo avanza en un paso medible e inmediato hoy.',
+          'Confía en que el mañana proveerá el siguiente fragmento del rompecabezas.'
+        ]
+      },
+      {
+        id: 'anxiety',
+        title: 'Ansiedad por Futuro o Estabilidad',
+        icon: 'shield-alert',
+        biblicalHero: 'Los Lirios del Campo (Mateo 6)',
+        lesson: 'La preocupación por variables fuera de control drena los recursos cognitivos necesarios para aportar valor y actuar en el presente.',
+        steps: [
+          'Aplica el Código 2: Distingue los riesgos reales de las fantasías catastróficas.',
+          'Escribe las 3 únicas cosas sobre las que tienes control directo hoy y ejecútalas.',
+          'Pasa del modo supervivencia al modo creación de valor recurrente.'
+        ]
+      },
+      {
+        id: 'critics',
+        title: 'Oposición, Juicios y Críticas',
+        icon: 'message-square-off',
+        biblicalHero: 'Nehemías en el Muro (Nehemías 6:3)',
+        lesson: 'Frente a los intentos de distracción e intimidación de sus opositores para que bajara a discutir, Nehemías respondió: "Estoy en medio de una gran obra, no puedo descender".',
+        steps: [
+          'No desperdicies energía cognitiva justificándote ante observadores pasivos.',
+          'Aplica el Código 8: Deja que la calidad de tus entregas hable por ti.',
+          'Mantén tu postura y haz de tus resultados tu escudo de credibilidad.'
+        ]
+      },
+      {
+        id: 'imposter',
+        title: 'Síndrome del Impostor y Autoduda',
+        icon: 'user-x',
+        biblicalHero: 'La Honda de David (1 Samuel 17)',
+        lesson: 'David rechazó la armadura prestada por el Rey Saúl porque era demasiado pesada y no se ajustaba a su identidad. Triunfó usando sus propias herramientas asimétricas.',
+        steps: [
+          'Aplica el Código 5: Deja de intentar encajar en la plantilla de éxito de otros.',
+          'Escribe un inventario honesto de tus destrezas reales y éxitos pasados.',
+          'Comienza a construir con tu propio estilo operativo, sin imitar posturas.'
+        ]
+      },
+      {
+        id: 'decision',
+        title: 'Incertidumbre en Decisiones Críticas',
+        icon: 'split',
+        biblicalHero: 'El Criterio de Salomón (1 Reyes 3)',
+        lesson: 'Salomón no buscó ventajas materiales iniciales, sino sabiduría (discernimiento). Entendió que el valor real está en percibir la intención oculta detrás del ruido exterior.',
+        steps: [
+          'Pregúntate: "¿Esta opción expande mi libertad de control a largo plazo o solo alivia el estrés inmediato?"',
+          'Aplica el Código 10: Filtra las emociones reactivas y haz una tabla de hechos objetivos.',
+          'Decide alineado a tus 3 valores no negociables.'
+        ]
+      },
+      {
+        id: 'stagnation',
+        title: 'Sensación de Estancamiento en Metas',
+        icon: 'trending-up',
+        biblicalHero: 'La Parábola de los Talentos (Mateo 25)',
+        lesson: 'El empleado que por miedo a fallar escondió su talento fue destituido. Los que arriesgaron y pusieron a trabajar sus recursos multiplicaron su influencia.',
+        steps: [
+          'Aplica el Código 7: Deja de esperar el momento idóneo; las condiciones perfectas no existen.',
+          'Pon tus ideas a prueba en el mercado real, aunque sea de forma humilde.',
+          'El impulso inicial es la única cura real para el estancamiento.'
+        ]
+      }
+    ];
+
+    let currentCategory = 'all';
+    let currentPillar = 'all';
+    let ambientSynth = null;
+    let ambientPlaying = false;
+    let currentConsultationText = "";
+    let speechUtterance = null;
+    let isSpeechPaused = false;
+
+    // INITIALIZATION
+    window.addEventListener('DOMContentLoaded', () => {
+      renderCodes();
+      renderBooks();
+      renderOracleSituations();
+      checkApiKeyConfig();
+      lucide.createIcons();
+    });
+
+    function checkApiKeyConfig() {
+      const warning = document.getElementById('api-key-warning');
+      if (!apiKey) {
+        warning.classList.remove('hidden');
+      } else {
+        warning.classList.add('hidden');
+      }
+    }
+
+    // 13 CODES VIEW RENDERING
+    function renderCodes() {
+      const container = document.getElementById('codes-grid');
+      const query = document.getElementById('codes-search').value.toLowerCase();
+      
+      const filtered = CODEX_DATA.filter(item => {
+        const matchesCat = currentCategory === 'all' || item.category === currentCategory;
+        const matchesQuery = item.title.toLowerCase().includes(query) || 
+                             item.bibleQuote.toLowerCase().includes(query) || 
+                             item.bibleRef.toLowerCase().includes(query) ||
+                             item.practicalAction.toLowerCase().includes(query) ||
+                             item.keyConcept.toLowerCase().includes(query);
+        return matchesCat && matchesQuery;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full py-12 text-center space-y-3">
+            <i data-lucide="inbox" class="w-12 h-12 text-slate-600 mx-auto"></i>
+            <p class="text-sm text-slate-500 font-mono">No se encontraron códigos para la búsqueda.</p>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      container.innerHTML = filtered.map(item => `
+        <div class="glass-panel p-5 rounded-2xl border border-obsidian-border hover:border-brand-500/35 transition-all duration-300 group flex flex-col justify-between space-y-4 shadow-sm hover:shadow-gold-glow hover:-translate-y-1">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-mono font-semibold px-2 py-0.5 rounded bg-brand-500/10 text-brand-300 border border-brand-500/20">
+                ${item.codeNum}
+              </span>
+              <span class="text-[10px] font-mono text-slate-500 uppercase tracking-wider">${item.keyConcept}</span>
+            </div>
+
+            <h3 class="font-cinzel font-bold text-lg text-slate-100 group-hover:text-brand-300 transition duration-300">
+              ${item.title}
+            </h3>
+
+            <div class="bg-obsidian-bg/85 p-3.5 rounded-xl border border-obsidian-border/80 space-y-2 relative overflow-hidden">
+              <div class="absolute left-0 top-0 h-full w-0.5 bg-brand-500/30"></div>
+              <p class="text-xs italic text-slate-300 font-serif leading-relaxed">
+                ${item.bibleQuote}
+              </p>
+              <span class="text-[10px] font-mono text-brand-400 block text-right font-medium">
+                — ${item.bibleRef}
+              </span>
+            </div>
+
+            <p class="text-xs text-slate-400 leading-relaxed line-clamp-3">
+              ${item.psychologicalMeaning}
+            </p>
+          </div>
+
+          <div class="pt-3 border-t border-obsidian-border/50 flex items-center justify-between gap-2">
+            <button onclick="openCodeModal(${item.id})" class="text-xs font-mono text-brand-300 hover:text-brand-200 flex items-center gap-1.5 transition">
+              Desglosar <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+            </button>
+            <div class="flex items-center gap-1.5">
+              <button onclick="copyCodeText(${item.id})" class="p-2 rounded-xl bg-obsidian-bg hover:bg-obsidian-border text-slate-400 hover:text-brand-300 border border-obsidian-border transition" title="Copiar principio">
+                <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+              </button>
+              <button onclick="speakText('${escapeQuotes(item.title + '. ' + item.bibleQuote + ' ' + item.bibleRef + '. ' + item.practicalAction)}', '${escapeQuotes(item.title)}')" class="p-2 rounded-xl bg-obsidian-bg hover:bg-obsidian-border text-slate-400 hover:text-brand-300 border border-obsidian-border transition" title="Escuchar audio">
+                <i data-lucide="volume-2" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      lucide.createIcons();
+    }
+
+    function filterCodes() {
+      renderCodes();
+    }
+
+    function setCategoryFilter(cat, btnElement) {
+      currentCategory = cat;
+      document.querySelectorAll('.cat-btn').forEach(btn => {
+        btn.classList.remove('active', 'bg-brand-500/15', 'text-brand-300', 'border-brand-500/30');
+        btn.classList.add('bg-obsidian-card/60', 'text-slate-400', 'border-obsidian-border');
+      });
+      btnElement.classList.add('active', 'bg-brand-500/15', 'text-brand-300', 'border-brand-500/30');
+      btnElement.classList.remove('bg-obsidian-card/60', 'text-slate-400', 'border-obsidian-border');
+      renderCodes();
+    }
+
+    // 66 BOOKS VIEW RENDERING
+    function renderBooks() {
+      const container = document.getElementById('books-grid');
+      const search = document.getElementById('book-search-input').value.toLowerCase();
+
+      const filtered = BIBLE_BOOKS.filter(b => {
+        const matchesPillar = currentPillar === 'all' || b.pillar === currentPillar;
+        const matchesSearch = b.name.toLowerCase().includes(search) || 
+                             b.theme.toLowerCase().includes(search) || 
+                             b.keyVerse.toLowerCase().includes(search);
+        return matchesPillar && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full py-12 text-center space-y-3">
+            <i data-lucide="inbox" class="w-12 h-12 text-slate-600 mx-auto"></i>
+            <p class="text-sm text-slate-500 font-mono">No se encontraron libros para la búsqueda.</p>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      container.innerHTML = filtered.map(b => {
+        let badgeColor = 'bg-slate-500/10 text-slate-300 border-slate-500/20';
+        if (b.pillar === 'sabiduria') badgeColor = 'bg-amber-500/10 text-amber-300 border-amber-500/20';
+        if (b.pillar === 'liderazgo') badgeColor = 'bg-emerald-500/10 text-emerald-300 border-emerald-500/20';
+        if (b.pillar === 'evangelios') badgeColor = 'bg-sky-500/10 text-sky-300 border-sky-500/20';
+
+        return `
+          <div class="glass-panel p-4.5 rounded-xl border border-obsidian-border hover:border-brand-500/25 transition-all duration-300 flex flex-col justify-between space-y-4 hover:-translate-y-0.5">
+            <div class="space-y-2.5">
+              <div class="flex items-center justify-between">
+                <span class="text-sm font-bold text-slate-100 font-cinzel tracking-wide">${b.name}</span>
+                <span class="text-[9px] font-mono px-2 py-0.5 rounded ${badgeColor} border">${b.chapters} Capítulos</span>
+              </div>
+              <p class="text-xs text-slate-300 leading-relaxed">${b.theme}</p>
+              <div class="p-2.5 rounded-lg bg-obsidian-bg/80 border border-obsidian-border/50 relative overflow-hidden">
+                <div class="absolute left-0 top-0 h-full w-0.5 bg-brand-400/20"></div>
+                <p class="text-[11px] font-serif italic text-brand-200 line-clamp-3">${b.keyVerse}</p>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between pt-2.5 border-t border-obsidian-border/80">
+              <button onclick="quickAsk('Desglose del libro de ${b.name}: lecciones prácticas de liderazgo, psicología y toma de decisiones.')" class="text-[11px] font-mono text-brand-300 hover:text-brand-200 flex items-center gap-1 transition">
+                Consultar con IA <i data-lucide="sparkles" class="w-3 h-3 text-brand-400"></i>
+              </button>
+              <button onclick="openBookDetailModal('${b.name}')" class="p-1.5 rounded bg-obsidian-bg text-slate-400 hover:text-slate-200 transition" title="Detalles">
+                <i data-lucide="info" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      lucide.createIcons();
+    }
+
+    function selectPillar(pillar, btnElement) {
+      currentPillar = pillar;
+      document.querySelectorAll('.pillar-tab').forEach(b => {
+        b.classList.remove('active', 'bg-brand-500/10', 'border-brand-500/35');
+        b.classList.add('bg-obsidian-card/60', 'border-obsidian-border');
+      });
+      btnElement.classList.add('active', 'bg-brand-500/10', 'border-brand-500/35');
+      btnElement.classList.remove('bg-obsidian-card/60', 'border-obsidian-border');
+      renderBooks();
+    }
+
+    // OFFLINE DEMO wisdom database for common queries
+    const MOCK_AI_RESPONSES = {
+      "salmo 23": `
+### 1. 📖 Pasaje & Contexto Real
+El Salmo 23 es el texto poético más célebre del Antiguo Testamento. Atribuido a David, se escribe en un contexto nómada y pastoril. El pastor no solo provee alimento, sino protección armada en los "valles de sombra de muerte" (desfiladeros rocosos propicios para emboscadas de fieras o ladrones).
+
+### 2. 🧠 El Principio Psicológico & Humano
+**El Anclaje de Seguridad Interior.** Ante la amenaza externa o la incertidumbre (el caos), la mente necesita desconectar el sistema simpático (lucha/huida) activando un Locus de Control Interno basado en la confianza de que los recursos para superar el trance ya están presentes o llegarán a tiempo.
+
+### 3. ⚡ Protocolo de Aplicación Práctica
+1. **Regulación Fisiológica:** Cuando te invada el caos, haz una pausa de 2 minutos. Cierra los ojos y respira lento para indicar a tu amígdala cerebral que estás a salvo en el presente.
+2. **Auditoría de Recursos:** Haz una lista de tus "pastos verdes": lo que ya posees y funciona hoy (salud, conocimiento, aliados).
+3. **Paso Bajo el Desfiladero:** Si estás cruzando una crisis, concéntrate únicamente en dar el paso inmediato que tienes delante, sin proyectar catástrofes en el futuro.
+
+### 4. 💡 Frase Síntesis para Grabar
+"La serenidad no es la ausencia de peligro, sino la certeza de tu fortaleza interior para cruzarlo."
+`,
+      "eclesiastes 3": `
+### 1. 📖 Pasaje & Contexto Real
+Eclesiastés (Cohelet) es un libro sapiencial atribuido a la madurez de Salomón. Eclesiastés 3 plantea un poema cíclico sobre el tiempo. Escrito en una época de transición cultural, propone que la vida no es lineal, sino una sucesión de estaciones inevitables sobre las cuales el ser humano no tiene control absoluto.
+
+### 2. 🧠 El Principio Psicológico & Humano
+**Aceptación de la Temporalidad y Flexibilidad Cognitiva.** El sufrimiento humano se amplifica cuando intentamos forzar una estación que ya terminó o resistirnos a la estación presente. Adaptar las acciones al "timing" del entorno reduce la fricción y optimiza el uso de la energía personal.
+
+### 3. ⚡ Protocolo de Aplicación Práctica
+1. **Diagnóstico de Estación:** Evalúa tu proyecto actual: ¿Estás en tiempo de sembrar (esfuerzo, inversión), de cosechar (retornos), de callar (observación) o de hablar (promoción)?
+2. **Eliminación de Fricción:** Acepta las condiciones de tu estación actual. Si es momento de sembrar, no te desesperes por la falta de frutos inmediatos.
+3. **Soltar el Pasado:** Detecta qué proyecto o creencia ya "perdió su tiempo" y déjala ir con gratitud.
+
+### 4. 💡 Frase Síntesis para Grabar
+"Fluir con la estación correcta es el secreto de la efectividad y la paz mental."
+`,
+      "nehemias 4": `
+### 1. 📖 Pasaje & Contexto Real
+Nehemías fue el copero del rey persa Artajerjes que obtuvo permiso para reconstruir las murallas destruidas de Jerusalén. Al iniciar la obra, enfrentó burlas constantes y amenazas físicas de gobernadores rivales (Sanbalat y Tobías) para hacerle suspender el proyecto.
+
+### 2. 🧠 El Principio Psicológico & Humano
+**Enfoque Blindado y Resiliencia Operativa.** Ante ataques externos o desmotivación, el líder no interrumpe su labor para confrontar al crítico. En su lugar, duplica la seguridad de su equipo (muralla blindada) y mantiene la atención en la construcción (ejecución pura).
+
+### 3. ⚡ Protocolo de Aplicación Práctica
+1. **Ignorar la Distracción:** Cuando recibas críticas no constructivas, no bajes del muro a discutir. Declara mentalmente: "Mi obra es importante".
+2. **Blindaje de Puntos Débiles:** Identifica en qué áreas de tu vida eres vulnerable al ataque y refuérzalas (adquiere datos, mejora tu preparación).
+3. **Acción Bivalente:** Trabaja con una mano construyendo tu meta y con la otra protegiendo tus avances (monitoreo y control).
+
+### 4. 💡 Frase Síntesis para Grabar
+"El crítico opina desde el suelo; el constructor responde desde la altura de su obra."
+`,
+      "mateo 6": `
+### 1. 📖 Pasaje & Contexto Real
+Parte del Sermón del Monte dictado por Jesús en Galilea, en una región de campesinos y pescadores oprimidos por altos impuestos romanos y sequías periódicas. Jesús les invita a observar las aves y los lirios para desmantelar la angustia diaria del sustento.
+
+### 2. 🧠 El Principio Psicológico & Humano
+**Reducción del Sesgo de Escasez.** El miedo obsesivo por la supervivencia futura satura el ancho de banda mental (ancho de banda cognitivo), reduciendo la inteligencia y la capacidad estratégica. La calma cognitiva permite enfocar la energía en la creación de valor en el presente.
+
+### 3. ⚡ Protocolo de Aplicación Práctica
+1. **Delimitar el Día:** Adopta la regla de "cada día tiene su propio afán". No intentes resolver los problemas de los próximos 6 meses hoy por la mañana.
+2. **Salir del Bucle Reactivo:** Cuando te asalte el temor financiero, sal al aire libre, camina 10 minutos para calmar el sistema nervioso y regresa a tu mesa con foco.
+3. **Acción de Impacto Primario:** Pregúntate: ¿Qué acción de valor puedo entregar hoy que empiece a desmantelar mi problema actual?
+
+### 4. 💡 Frase Síntesis para Grabar
+"El afán del mañana paraliza la acción del hoy; la maestría se construye en el único tiempo que posees: el ahora."
+`
+    };
+
+    function getSimulatedResponse(query) {
+      const queryLower = query.toLowerCase();
+      
+      // Match predefined keys
+      for (let key in MOCK_AI_RESPONSES) {
+        if (queryLower.includes(key)) {
+          return MOCK_AI_RESPONSES[key];
+        }
+      }
+
+      // Check if it's a book search
+      for (let b of BIBLE_BOOKS) {
+        if (queryLower.includes(b.name.toLowerCase())) {
+          return `
+### 1. 📖 Pasaje & Contexto Real
+El libro de **${b.name}** es un pilar fundamental en la categoría de **${b.pillar === 'sabiduria' ? 'Mente & Sabiduría' : b.pillar === 'liderazgo' ? 'Liderazgo & Crisis' : 'Evangelios y Autocontrol'}**. Históricamente, aborda la necesidad de mantener la templanza y el enfoque estratégico ante las adversidades sociales y políticas de su época. Su eje central es: "${b.theme}".
+
+### 2. 🧠 El Principio Psicológico & Humano
+**El Autocontrol y la Coherencia de Principios.** Psicólogos modernos identifican en ${b.name} un modelo mental de Locus de Control Interno. El éxito duradero no se atribuye a golpes de azar externos, sino a la consistencia diaria con tus propios valores morales y a la regulación de las reacciones ante los estímulos negativos del entorno.
+
+### 3. ⚡ Protocolo de Aplicación Práctica
+1. **Alineación Diaria:** Revisa el versículo clave de este libro: *"${b.keyVerse}"*. Haz una pausa al iniciar el día para calibrar tus intenciones según este principio.
+2. **Ejecución Asimétrica:** En lugar de reaccionar de forma agresiva o temerosa ante los bloqueos, responde con calma objetiva y pasos pequeños pero constantes.
+3. **Evaluación de Frutos:** Mide el éxito de tus interacciones diarias no por la aprobación ajena, sino por la paz y el progreso que dejas a tu paso.
+
+### 4. 💡 Frase Síntesis para Grabar
+"La verdadera sabiduría del libro de ${b.name} se demuestra en la coherencia de tus hábitos diarios y tu templanza ante el caos."
+`;
+        }
+      }
+
+      // Generic fallback based on keywords
+      let theme = "Sabiduría y Autocontrol";
+      let lesson = "El enfoque estratégico y la reducción del ruido mental frente al estímulo del entorno.";
+      if (queryLower.includes("ansiedad") || queryLower.includes("miedo") || queryLower.includes("preocup") || queryLower.includes("estres")) {
+        theme = "Regulación del Miedo y Serenidad";
+        lesson = "Filtrar variables que escapan de tu control inmediato e incrementar el foco cognitivo en el presente.";
+      } else if (queryLower.includes("liderazgo") || queryLower.includes("equipo") || queryLower.includes("jefe") || queryLower.includes("autoridad")) {
+        theme = "Liderazgo Asimétrico y Servicio";
+        lesson = "Mantener la integridad en las murallas del proyecto e ignorar los distractores ruidosos de los opositores.";
+      } else if (queryLower.includes("decis") || queryLower.includes("duda") || queryLower.includes("camino") || queryLower.includes("incert")) {
+        theme = "Discernimiento y Claridad Estratégica";
+        lesson = "Separar los datos fríos de la emoción momentánea antes de tomar determinaciones irreversibles.";
+      } else if (queryLower.includes("fracaso") || queryLower.includes("error") || queryLower.includes("caida") || queryLower.includes("perder")) {
+        theme = "Resiliencia Humana y Aprendizaje";
+        lesson = "La ley de siembra y cosecha: el error se asimila como costo de experiencia si el ego no interfiere en el análisis.";
+      }
+
+      return `
+### 1. 📖 Pasaje & Contexto Real
+La consulta sobre **"${query}"** conecta directamente con los pasajes sapienciales y las narrativas de superación del Codex. Históricamente, el texto bíblico analiza estos desafíos humanos (miedo al futuro, toma de decisiones difíciles, liderazgo bajo presión) no como eventos místicos aislados, sino como la base para cultivar el discernimiento práctico en tiempos de adversidad.
+
+### 2. 🧠 El Principio Psicológico & Humano
+**El principio de ${theme}.** En términos de psicología profunda y cognitiva, este tema nos enseña que: ${lesson} Cuando la mente humana logra acallar el ruido exterior o el miedo al rechazo social, el cerebro reactiva sus funciones de planificación a largo plazo.
+
+### 3. ⚡ Protocolo de Aplicación Práctica
+1. **Filtro de Atención:** Escribe en un papel qué porcentaje de tu preocupación actual sobre "${query}" depende al 100% de tus acciones. Enfócate exclusivamente en ese fragmento.
+2. **Trabajo en Silencio:** Aplica el Código 11: dedica un espacio de concentración profunda sin interrupciones para avanzar de manera práctica en este dilema.
+3. **Evaluar sin Juzgar:** Da un paso proactivo hoy y evalúa los resultados con datos fríos y objetivos, desechando los temores heredados.
+
+### 4. 💡 Frase Síntesis para Grabar
+"La claridad ante la incertidumbre nace en el instante en que decides gobernar tus pensamientos en lugar de tus circunstancias."
+`;
+    }
+
+    // AI BIBLE CONSULTANT INTERFACE (GEMINI API CONNECTIVITY FIXED WITH DEMO SIMULATOR FOR NON-PROGRAMMERS)
+    async function askBibleConsultant() {
+      const input = document.getElementById('bible-ai-query');
+      const query = input.value.trim();
+      if (!query) return;
+
+      const resultBox = document.getElementById('ai-result-box');
+      const resultContent = document.getElementById('ai-result-content');
+      const loading = document.getElementById('ai-loading');
+      const resultTitle = document.getElementById('ai-result-title');
+      const searchBtn = document.getElementById('ai-search-btn');
+
+      resultBox.classList.add('hidden');
+      loading.classList.remove('hidden');
+      searchBtn.disabled = true;
+
+      // Update loading status text incrementally
+      const loadingMessages = [
+        "Conectando con el motor de sabiduría...",
+        "Analizando el contexto histórico del pasaje...",
+        "Extrayendo principios psicológicos y modelos mentales...",
+        "Estructurando el protocolo de acción..."
+      ];
+      let msgIndex = 0;
+      document.getElementById('loading-message').innerText = loadingMessages[0];
+      const loadingInterval = setInterval(() => {
+        msgIndex = (msgIndex + 1) % loadingMessages.length;
+        document.getElementById('loading-message').innerText = loadingMessages[msgIndex];
+      }, 1500);
+
+      // --- MOCK SIMULATOR MODE IF NO API KEY IS CONFIGURED ---
+      if (!apiKey) {
+        setTimeout(() => {
+          clearInterval(loadingInterval);
+          loading.classList.add('hidden');
+          searchBtn.disabled = false;
+
+          const simulatedText = getSimulatedResponse(query);
+          currentConsultationText = simulatedText.replace(/###/g, '').replace(/\*/g, '').replace(/📖/g, '').replace(/🧠/g, '').replace(/⚡/g, '').replace(/💡/g, '');
+          resultTitle.innerText = `Decodificación (Modo Demo): ${query}`;
+          
+          renderStructuredAIResult(simulatedText, resultContent);
+          
+          // Append the demo notice banner to the rendered grid
+          const grid = resultContent.querySelector('.grid') || resultContent;
+          const demoBanner = document.createElement('div');
+          demoBanner.className = "md:col-span-2 mt-4 p-4 rounded-xl border border-brand-500/20 bg-brand-500/5 text-center flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-brand-300";
+          demoBanner.innerHTML = `
+            <div class="flex items-center gap-2 text-left">
+              <i data-lucide="sparkles" class="w-4.5 h-4.5 text-brand-400 shrink-0"></i>
+              <span><strong>Modo Demo Activo:</strong> Estás viendo una respuesta pre-guardada o simulada de sabiduría. Para conectar la Inteligencia Artificial en vivo y consultar cualquier tema libremente, configura tu clave de desarrollo gratuita de Gemini en la configuración.</span>
+            </div>
+            <button onclick="openSettingsModal()" class="px-3.5 py-1.5 rounded-lg bg-brand-500 hover:bg-brand-400 text-obsidian-bg font-bold transition shrink-0">Configurar Key</button>
+          `;
+          grid.appendChild(demoBanner);
+          
+          resultBox.classList.remove('hidden');
+          resultBox.scrollIntoView({ behavior: 'smooth' });
+          lucide.createIcons();
+        }, 1500);
+        return;
+      }
+
+      // --- LIVE MODE (WITH API KEY) ---
+      const systemPrompt = `Eres un experto historiador y teólogo secular, especialista en exégesis bíblica e interpretación psicológica profunda.
+El usuario te enviará un pasaje, personaje o situación humana cotidiana.
+
+Tu misión es responder con absoluta claridad y profundidad útil en ESPAÑOL, estructurando tu respuesta en 4 secciones marcadas exactamente con estas cabeceras:
+
+### 1. 📖 Pasaje & Contexto Real
+(Cita el pasaje o explica el trasfondo y contexto histórico y literario del tema de forma concisa).
+
+### 2. 🧠 El Principio Psicológico & Humano
+(Traduce el pasaje en un principio de comportamiento, ley de reciprocidad, sesgo cognitivo, inteligencia emocional o modelo mental).
+
+### 3. ⚡ Protocolo de Aplicación Práctica
+(Enumera 2 o 3 pasos claros y medibles de aplicación diaria).
+
+### 4. 💡 Frase Síntesis para Grabar
+(Una única frase de alto impacto y retención).
+
+Mantén un tono profesional, pragmático, respetuoso y secular.`;
+
+      const userContent = `Consulta: "${query}"`;
+      
+      const maxRetries = 3;
+      let attempt = 0;
+      let success = false;
+      let responseData = null;
+      let errorMsg = "Ocurrió un error inesperado al conectar con el servidor.";
+
+      while (attempt < maxRetries && !success) {
+        try {
+          const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${selectedModel}:generateContent?key=${apiKey}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              contents: [{ role: 'user', parts: [{ text: userContent }] }],
+              systemInstruction: { parts: [{ text: systemPrompt }] }
+            })
+          });
+
+          if (!response.ok) {
+            const errData = await response.json().catch(() => ({}));
+            errorMsg = errData?.error?.message || `HTTP ${response.status}: ${response.statusText}`;
+            throw new Error(`Gemini API Error: ${response.status}`);
+          }
+
+          responseData = await response.json();
+          success = true;
+        } catch (err) {
+          attempt++;
+          if (attempt >= maxRetries) break;
+          const delay = Math.pow(2, attempt) * 600;
+          await new Promise(r => setTimeout(r, delay));
+        }
+      }
+
+      clearInterval(loadingInterval);
+      loading.classList.add('hidden');
+      searchBtn.disabled = false;
+
+      if (success && responseData?.candidates?.[0]?.content?.parts?.[0]?.text) {
+        const text = responseData.candidates[0].content.parts[0].text;
+        
+        // Clean text formatting for voice reader
+        currentConsultationText = text.replace(/###/g, '').replace(/\*/g, '').replace(/📖/g, '').replace(/🧠/g, '').replace(/⚡/g, '').replace(/💡/g, '');
+        resultTitle.innerText = `Decodificación: ${query}`;
+        
+        // Render structured visual cards
+        renderStructuredAIResult(text, resultContent);
+        resultBox.classList.remove('hidden');
+        resultBox.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        resultTitle.innerText = `Error de Conexión`;
+        resultContent.innerHTML = `
+          <div class="p-4 rounded-xl border border-rose-500/25 bg-rose-500/5 text-rose-300 space-y-2">
+            <div class="flex items-center gap-2 font-mono text-xs font-semibold">
+              <i data-lucide="alert-octagon" class="w-4 h-4 text-rose-400"></i>
+              <span>Error al procesar la solicitud</span>
+            </div>
+            <p class="text-xs leading-relaxed">
+              El servidor de Inteligencia Artificial devolvió el siguiente error: 
+              <code class="px-1.5 py-0.5 rounded bg-obsidian-bg border border-obsidian-border text-rose-400 font-mono text-[10px] break-all">${errorMsg}</code>.
+            </p>
+            <div class="pt-2 flex gap-2">
+              <button onclick="askBibleConsultant()" class="px-3 py-1.5 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-xs font-semibold border border-rose-500/30 transition">Reintentar</button>
+              <button onclick="openSettingsModal()" class="px-3 py-1.5 rounded-lg bg-obsidian-card hover:bg-obsidian-border text-xs border border-obsidian-border text-slate-300 transition">Revisar Ajustes</button>
+            </div>
+          </div>
+        `;
+        resultBox.classList.remove('hidden');
+        lucide.createIcons();
+      }
+    }
+
+    function quickAsk(text) {
+      document.getElementById('bible-ai-query').value = text;
+      switchView('library');
+      askBibleConsultant();
+    }
+
+    // Redesigns AI response from markdown string into beautiful dashboard cards
+    function renderStructuredAIResult(markdownText, targetContainer) {
+      // Split by heading levels
+      const parts = markdownText.split(/###\s+/);
+      
+      let contextHtml = "";
+      let psychologyHtml = "";
+      let protocolHtml = "";
+      let synthesisHtml = "";
+      let fallbackHtml = "";
+
+      parts.forEach(part => {
+        if (!part.trim()) return;
+
+        if (part.includes("1. 📖") || part.toLowerCase().includes("contexto") || part.startsWith("1.")) {
+          const content = part.replace(/^1\.\s+📖\s*[^\n]+\n/, '').replace(/^1\.\s+[^\n]+\n/, '');
+          contextHtml = marked.parse(content);
+        } else if (part.includes("2. 🧠") || part.toLowerCase().includes("psicol") || part.startsWith("2.")) {
+          const content = part.replace(/^2\.\s+🧠\s*[^\n]+\n/, '').replace(/^2\.\s+[^\n]+\n/, '');
+          psychologyHtml = marked.parse(content);
+        } else if (part.includes("3. ⚡") || part.toLowerCase().includes("aplic") || part.startsWith("3.")) {
+          const content = part.replace(/^3\.\s+⚡\s*[^\n]+\n/, '').replace(/^3\.\s+[^\n]+\n/, '');
+          protocolHtml = marked.parse(content);
+        } else if (part.includes("4. 💡") || part.toLowerCase().includes("sint") || part.startsWith("4.")) {
+          const content = part.replace(/^4\.\s+💡\s*[^\n]+\n/, '').replace(/^4\.\s+[^\n]+\n/, '');
+          synthesisHtml = marked.parse(content);
+        } else {
+          fallbackHtml += `\n\n### ` + part;
+        }
+      });
+
+      if (contextHtml || psychologyHtml || protocolHtml || synthesisHtml) {
+        targetContainer.innerHTML = `
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <!-- Context Box -->
+            <div class="glass-panel p-5 rounded-2xl border border-blue-500/10 bg-blue-500/[0.01] space-y-3 shadow-sm flex flex-col justify-between">
+              <div class="space-y-2">
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center">
+                    <i data-lucide="book-open" class="w-4.5 h-4.5 text-blue-400"></i>
+                  </div>
+                  <h4 class="text-xs font-mono text-blue-400 uppercase tracking-widest font-semibold">Exégesis &amp; Contexto Real</h4>
+                </div>
+                <div class="prose-custom text-xs sm:text-sm text-slate-300">${contextHtml}</div>
+              </div>
+            </div>
+
+            <!-- Psychology Box -->
+            <div class="glass-panel p-5 rounded-2xl border border-amber-500/10 bg-amber-500/[0.01] space-y-3 shadow-sm flex flex-col justify-between">
+              <div class="space-y-2">
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-lg bg-amber-500/10 flex items-center justify-center">
+                    <i data-lucide="brain" class="w-4.5 h-4.5 text-amber-400"></i>
+                  </div>
+                  <h4 class="text-xs font-mono text-amber-400 uppercase tracking-widest font-semibold">Principio Psicológico</h4>
+                </div>
+                <div class="prose-custom text-xs sm:text-sm text-slate-300">${psychologyHtml}</div>
+              </div>
+            </div>
+
+            <!-- Protocol Box -->
+            <div class="glass-panel p-5 rounded-2xl border border-emerald-500/10 bg-emerald-500/[0.01] space-y-3 shadow-sm md:col-span-2 flex flex-col justify-between">
+              <div class="space-y-2.5">
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center">
+                    <i data-lucide="zap" class="w-4.5 h-4.5 text-emerald-400"></i>
+                  </div>
+                  <h4 class="text-xs font-mono text-emerald-400 uppercase tracking-widest font-semibold">Protocolo de Acción Práctica</h4>
+                </div>
+                <div class="prose-custom text-xs sm:text-sm text-slate-300">${protocolHtml}</div>
+              </div>
+            </div>
+
+            <!-- Synthesis Callout -->
+            <div class="md:col-span-2 relative p-6 rounded-2xl border border-brand-500/20 bg-brand-500/5 text-center overflow-hidden flex flex-col items-center justify-center space-y-3">
+              <div class="absolute -left-6 -top-6 text-brand-500/10 opacity-20 transform -rotate-12 pointer-events-none">
+                <i data-lucide="quote" class="w-24 h-24"></i>
+              </div>
+              <span class="text-[10px] font-mono text-brand-300 uppercase tracking-widest font-semibold">Frase de Anclaje</span>
+              <div class="prose-custom text-slate-100 italic text-sm sm:text-base font-cinzel font-medium max-w-2xl leading-relaxed">${synthesisHtml}</div>
+            </div>
+          </div>
+        `;
+      } else {
+        // Fallback to basic Markdown rendering if headers don't match the expectation
+        targetContainer.innerHTML = `
+          <div class="glass-panel p-5 rounded-2xl border border-obsidian-border bg-obsidian-card/40 prose-custom text-xs sm:text-sm text-slate-300">
+            ${marked.parse(markdownText)}
+          </div>
+        `;
+      }
+      lucide.createIcons();
+    }
+
+    // MODAL HANDLERS
+    function openBookDetailModal(bookName) {
+      const book = BIBLE_BOOKS.find(b => b.name === bookName);
+      if (!book) return;
+
+      const content = document.getElementById('modal-content');
+      content.innerHTML = `
+        <div class="space-y-5">
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] font-mono px-2.5 py-1 rounded bg-brand-500/10 text-brand-300 border border-brand-500/20 font-bold uppercase tracking-wider">Libro Histórico</span>
+            <span class="text-xs font-mono text-slate-400">${book.chapters} Capítulos</span>
+          </div>
+
+          <h2 class="text-2xl font-cinzel font-bold text-slate-100 border-b border-obsidian-border pb-2.5">${book.name}</h2>
+
+          <div class="p-4 rounded-xl bg-obsidian-bg border border-obsidian-border space-y-1.5 relative">
+            <span class="text-[10px] font-mono text-brand-400 uppercase tracking-wider block">Foco Temático:</span>
+            <p class="text-sm text-slate-200 leading-relaxed">${book.theme}</p>
+          </div>
+
+          <div class="p-4.5 rounded-xl bg-brand-500/5 border border-brand-500/20 space-y-1.5 relative overflow-hidden">
+            <div class="absolute -right-4 -bottom-4 text-brand-500/5 pointer-events-none">
+              <i data-lucide="book-marked" class="w-16 h-16"></i>
+            </div>
+            <span class="text-[10px] font-mono text-brand-300 uppercase tracking-wider block">Versículo Clave:</span>
+            <p class="font-serif italic text-sm text-brand-100 leading-relaxed">${book.keyVerse}</p>
+          </div>
+
+          <div class="pt-3 flex justify-between items-center border-t border-obsidian-border">
+            <button onclick="closeModal(); quickAsk('Análisis práctico detallado de ${book.name} con sus 3 lecciones maestras');" class="gold-gradient-btn px-4.5 py-2.5 text-obsidian-bg font-bold text-xs rounded-xl flex items-center gap-2 shadow-md shadow-brand-500/10">
+              <i data-lucide="sparkles" class="w-4 h-4"></i> Desglosar con IA
+            </button>
+            <button onclick="closeModal()" class="px-4 py-2 rounded-xl bg-obsidian-card border border-obsidian-border hover:border-brand-500/20 text-xs font-semibold text-slate-300 transition">
+              Cerrar
+            </button>
+          </div>
+        </div>
+      `;
+
+      const container = document.getElementById('modal-container');
+      const box = document.getElementById('modal-box');
+      container.classList.remove('hidden');
+      setTimeout(() => {
+        box.classList.remove('scale-95', 'opacity-0');
+      }, 10);
+      lucide.createIcons();
+    }
+
+    function openCodeModal(id) {
+      const code = CODEX_DATA.find(c => c.id === id);
+      if (!code) return;
+
+      const content = document.getElementById('modal-content');
+      content.innerHTML = `
+        <div class="space-y-5">
+          <div class="flex items-center gap-2 justify-between">
+            <span class="text-[10px] font-mono px-2.5 py-1 rounded bg-brand-500/10 text-brand-300 border border-brand-500/20 font-bold uppercase tracking-wider">${code.codeNum}</span>
+            <span class="text-xs font-mono text-slate-400">${code.keyConcept}</span>
+          </div>
+
+          <h2 class="text-2xl font-cinzel font-bold text-slate-100 border-b border-obsidian-border pb-2.5">${code.title}</h2>
+
+          <div class="p-4.5 rounded-xl bg-obsidian-bg border border-obsidian-border space-y-2 relative overflow-hidden">
+            <div class="absolute left-0 top-0 h-full w-0.5 bg-brand-400"></div>
+            <p class="font-serif italic text-sm text-brand-200 leading-relaxed">${code.bibleQuote}</p>
+            <span class="text-[11px] font-mono text-slate-500 block text-right font-medium">— ${code.bibleRef}</span>
+          </div>
+
+          <div class="space-y-1.5">
+            <h4 class="text-xs font-mono text-slate-400 uppercase tracking-widest font-semibold flex items-center gap-1.5">
+              <i data-lucide="brain" class="w-4 h-4 text-brand-300"></i> Desglose de Ley Humana &amp; Psicología:
+            </h4>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">${code.psychologicalMeaning}</p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-brand-500/5 border border-brand-500/20 space-y-1.5 relative overflow-hidden">
+            <div class="absolute -right-4 -bottom-4 text-brand-500/5 pointer-events-none">
+              <i data-lucide="zap" class="w-16 h-16"></i>
+            </div>
+            <h4 class="text-xs font-mono text-brand-300 uppercase tracking-widest font-semibold flex items-center gap-1.5">
+              <i data-lucide="zap" class="w-4 h-4 text-brand-400"></i> Protocolo de Acción Práctica:
+            </h4>
+            <p class="text-xs sm:text-sm text-slate-200 leading-relaxed font-medium">${code.practicalAction}</p>
+          </div>
+
+          <div class="pt-3 flex justify-between items-center border-t border-obsidian-border">
+            <div class="flex items-center gap-2">
+              <button onclick="speakText('${escapeQuotes(code.title + '. ' + code.bibleQuote + ' ' + code.bibleRef + '. ' + code.psychologicalMeaning + ' Aplicación: ' + code.practicalAction)}', '${escapeQuotes(code.title)}')" class="px-3.5 py-2 rounded-xl bg-obsidian-card border border-obsidian-border hover:border-brand-500/20 text-xs font-mono text-slate-200 flex items-center gap-1.5 transition">
+                <i data-lucide="volume-2" class="w-4 h-4 text-brand-400"></i> Escuchar
+              </button>
+              <button onclick="copyCodeText(${code.id})" class="px-3.5 py-2 rounded-xl bg-obsidian-card border border-obsidian-border hover:border-brand-500/20 text-xs font-mono text-slate-200 flex items-center gap-1.5 transition">
+                <i data-lucide="copy" class="w-4 h-4 text-brand-400"></i> Copiar
+              </button>
+            </div>
+            <button onclick="closeModal()" class="px-5 py-2 rounded-xl bg-brand-500 hover:bg-brand-600 text-obsidian-bg font-bold text-xs transition">
+              Cerrar
+            </button>
+          </div>
+        </div>
+      `;
+
+      const container = document.getElementById('modal-container');
+      const box = document.getElementById('modal-box');
+      container.classList.remove('hidden');
+      setTimeout(() => {
+        box.classList.remove('scale-95', 'opacity-0');
+      }, 10);
+      lucide.createIcons();
+    }
+
+    function closeModal() {
+      const container = document.getElementById('modal-container');
+      const box = document.getElementById('modal-box');
+      box.classList.add('scale-95', 'opacity-0');
+      setTimeout(() => {
+        container.classList.add('hidden');
+      }, 200);
+    }
+
+    // VIEW SWAPPER (WITH SLIDING ACTIVE CAPSULE AND DYNAMIC CSS POSITIONS)
+    function switchView(viewName) {
+      document.querySelectorAll('main > section').forEach(sec => sec.classList.add('hidden'));
+      document.getElementById(`view-${viewName}`).classList.remove('hidden');
+
+      // Update navbar buttons
+      document.querySelectorAll('nav button').forEach(tab => {
+        tab.classList.remove('text-brand-300');
+        tab.classList.add('text-slate-400', 'hover:text-slate-200');
+      });
+
+      const activeBtn = document.getElementById(`tab-btn-${viewName}`);
+      if (activeBtn) {
+        activeBtn.classList.add('text-brand-300');
+        activeBtn.classList.remove('text-slate-400', 'hover:text-slate-200');
+        
+        // Move indicator pill
+        const indicator = document.getElementById('tab-indicator');
+        const offsetLeft = activeBtn.offsetLeft;
+        const width = activeBtn.offsetWidth;
+        
+        indicator.style.left = `${offsetLeft}px`;
+        indicator.style.width = `${width}px`;
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // SETTINGS MODAL HANDLERS
+    function openSettingsModal() {
+      document.getElementById('input-api-key').value = apiKey;
+      document.getElementById('select-model').value = (['gemini-3.6-flash', 'gemini-2.5-flash', 'gemini-1.5-flash', 'gemini-2.0-flash', 'gemini-1.5-pro'].includes(selectedModel)) ? selectedModel : 'custom';
+      
+      handleModelChange();
+      document.getElementById('settings-modal').classList.remove('hidden');
+    }
+
+    function closeSettingsModal() {
+      document.getElementById('settings-modal').classList.add('hidden');
+    }
+
+    function handleModelChange() {
+      const select = document.getElementById('select-model');
+      const customBox = document.getElementById('custom-model-box');
+      if (select.value === 'custom') {
+        customBox.classList.remove('hidden');
+        document.getElementById('input-custom-model').value = selectedModel;
+      } else {
+        customBox.classList.add('hidden');
+      }
+    }
+
+    function toggleApiKeyVisibility() {
+      const input = document.getElementById('input-api-key');
+      const eyeIcon = document.getElementById('eye-icon');
+      if (input.type === 'password') {
+        input.type = 'text';
+        eyeIcon.setAttribute('data-lucide', 'eye-off');
+      } else {
+        input.type = 'password';
+        eyeIcon.setAttribute('data-lucide', 'eye');
+      }
+      lucide.createIcons();
+    }
+
+    function saveSettings() {
+      const rawKey = document.getElementById('input-api-key').value.trim();
+      const modelSelect = document.getElementById('select-model').value;
+      let finalModel = modelSelect;
+
+      if (modelSelect === 'custom') {
+        finalModel = document.getElementById('input-custom-model').value.trim();
+      }
+
+      apiKey = rawKey;
+      selectedModel = finalModel || 'gemini-3.6-flash';
+
+      localStorage.setItem('gemini_api_key', apiKey);
+      localStorage.setItem('gemini_model', selectedModel);
+
+      checkApiKeyConfig();
+      closeSettingsModal();
+      showToast("Configuración guardada correctamente");
+    }
+
+    // ORACLE SITUATIONS INTERACTION
+    function renderOracleSituations() {
+      const container = document.getElementById('situations-container');
+      container.innerHTML = ORACLE_SITUATIONS.map(s => `
+        <button onclick="selectSituation('${s.id}')" class="p-5 rounded-2xl bg-obsidian-card border border-obsidian-border hover:border-brand-500/35 text-left transition-all duration-300 group space-y-3.5 hover:shadow-gold-glow hover:-translate-y-0.5">
+          <div class="w-10 h-10 rounded-xl bg-brand-500/10 text-brand-300 flex items-center justify-center group-hover:scale-105 group-hover:bg-brand-500/25 transition duration-300">
+            <i data-lucide="${s.icon}" class="w-5 h-5 text-brand-400"></i>
+          </div>
+          <p class="font-bold text-sm text-slate-200 group-hover:text-brand-300 transition duration-300">${s.title}</p>
+        </button>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    function selectSituation(id) {
+      const item = ORACLE_SITUATIONS.find(s => s.id === id);
+      if (!item) return;
+
+      const resultBox = document.getElementById('oracle-result');
+      resultBox.classList.remove('hidden');
+
+      resultBox.innerHTML = `
+        <div class="glass-panel p-6 sm:p-8 rounded-2xl border border-brand-500/25 space-y-6 mt-6 shadow-gold-glow relative overflow-hidden">
+          <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-obsidian-border pb-4">
+            <div>
+              <span class="text-xs font-mono text-brand-400 uppercase tracking-widest">Diagnóstico &amp; Estrategia</span>
+              <h3 class="text-2xl font-cinzel font-bold text-slate-100">${item.title}</h3>
+            </div>
+            <div class="text-left md:text-right shrink-0">
+              <span class="text-[10px] font-mono text-slate-500 block uppercase tracking-wider">Arquetipo Histórico:</span>
+              <span class="text-xs font-semibold text-brand-200 font-mono">${item.biblicalHero}</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+            <!-- Left context -->
+            <div class="lg:col-span-2 bg-obsidian-bg p-5 rounded-xl border border-obsidian-border/80 space-y-2.5 relative">
+              <div class="absolute left-0 top-0 h-full w-0.5 bg-brand-400/30"></div>
+              <h4 class="text-xs font-mono text-brand-400 uppercase tracking-wider font-semibold">La Lección Estratégica</h4>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">${item.lesson}</p>
+            </div>
+
+            <!-- Right list steps -->
+            <div class="lg:col-span-3 space-y-3">
+              <h4 class="text-xs font-mono text-slate-400 uppercase tracking-wider font-semibold">Protocolo Operativo Recomendado:</h4>
+              <div class="space-y-2">
+                ${item.steps.map((st, i) => `
+                  <label class="flex items-start gap-3 p-3.5 rounded-xl bg-obsidian-card/40 border border-obsidian-border text-xs sm:text-sm text-slate-200 hover:bg-obsidian-card hover:border-brand-500/10 cursor-pointer transition select-none">
+                    <input type="checkbox" class="mt-0.5 rounded border-obsidian-border text-brand-500 focus:ring-brand-500/30 w-4 h-4 bg-obsidian-bg">
+                    <span>${st}</span>
+                  </label>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap gap-2.5 pt-4 border-t border-obsidian-border/80">
+            <button onclick="speakText('${escapeQuotes(item.title + '. Arquetipo: ' + item.biblicalHero + '. Lección: ' + item.lesson + '. Protocolo: ' + item.steps.join('. '))}', '${escapeQuotes(item.title)}')" class="px-4 py-2.5 rounded-xl bg-obsidian-card border border-obsidian-border hover:border-brand-500/25 text-xs font-mono text-brand-300 flex items-center gap-2 transition">
+              <i data-lucide="volume-2" class="w-4 h-4 text-brand-400"></i> Escuchar Diagnóstico
+            </button>
+            <button onclick="copyToClipboard('${escapeQuotes(item.title + '\\n\\nArquetipo: ' + item.biblicalHero + '\\n\\nLección: ' + item.lesson + '\\n\\nPasos:\\n' + item.steps.map((s,i)=> (i+1)+'. '+s).join('\\n'))}'); showToast('Estrategia copiada al portapapeles');" class="px-4 py-2.5 rounded-xl bg-obsidian-card border border-obsidian-border hover:border-brand-500/25 text-xs font-mono text-slate-300 flex items-center gap-2 transition">
+              <i data-lucide="copy" class="w-4 h-4 text-brand-400"></i> Copiar
+            </button>
+          </div>
+        </div>
+      `;
+      lucide.createIcons();
+      resultBox.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // AUXILIARY UTILITIES (COPY, TOAST, TTS AUDIO PLAYER)
+    function copyCodeText(id) {
+      const code = CODEX_DATA.find(c => c.id === id);
+      if (!code) return;
+      const text = `${code.codeNum}: ${code.title}\n"${code.bibleQuote}" — ${code.bibleRef}\n\nSignificado Psicológico: ${code.psychologicalMeaning}\n\nAplicación Práctica: ${code.practicalAction}`;
+      copyToClipboard(text);
+      showToast("Principio copiado al portapapeles");
+    }
+
+    // Share application logic
+    function shareAppUrl() {
+      const shareData = {
+        title: 'Codex Bíblico: Sabiduría y Filosofía Práctica',
+        text: 'Explora los 13 códigos maestros, los 66 libros y el consultor de sabiduría práctica.',
+        url: window.location.href
+      };
+      if (navigator.share) {
+        navigator.share(shareData).catch(() => {});
+      } else {
+        copyToClipboard(window.location.href);
+        showToast("Enlace copiado para compartir");
+      }
+    }
+
+    function copyToClipboard(text) {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand('copy');
+      } catch (e) {}
+      document.body.removeChild(textarea);
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('action-toast');
+      const text = document.getElementById('toast-text');
+      text.innerText = msg;
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 3000);
+    }
+
+    // DYNAMIC SPEECH SYNTHESIS NARRATION PLAYER
+    function speakText(text, title) {
+      if (!('speechSynthesis' in window)) {
+        showToast("Lectura de voz no compatible con tu navegador.");
+        return;
+      }
+      window.speechSynthesis.cancel();
+      isSpeechPaused = false;
+      document.getElementById('speech-pause-icon').setAttribute('data-lucide', 'pause');
+
+      const toast = document.getElementById('voice-toast');
+      document.getElementById('voice-toast-text').innerText = title || "Narración de Sabiduría";
+      toast.classList.remove('hidden');
+
+      speechUtterance = new SpeechSynthesisUtterance(text);
+      speechUtterance.lang = 'es-ES';
+      speechUtterance.rate = 0.95;
+      speechUtterance.pitch = 1.0;
+
+      // Animate wave lines on play
+      const bars = document.querySelectorAll('#soundwave-container .voice-bar');
+      bars.forEach(bar => bar.style.animationPlayState = 'running');
+
+      speechUtterance.onend = () => {
+        toast.classList.add('hidden');
+      };
+      speechUtterance.onerror = () => {
+        toast.classList.add('hidden');
+      };
+
+      window.speechSynthesis.speak(speechUtterance);
+      lucide.createIcons();
+    }
+
+    function toggleSpeechPause() {
+      if (!('speechSynthesis' in window) || !speechUtterance) return;
+      const pauseIcon = document.getElementById('speech-pause-icon');
+      const bars = document.querySelectorAll('#soundwave-container .voice-bar');
+
+      if (isSpeechPaused) {
+        window.speechSynthesis.resume();
+        isSpeechPaused = false;
+        pauseIcon.setAttribute('data-lucide', 'pause');
+        bars.forEach(bar => bar.style.animationPlayState = 'running');
+      } else {
+        window.speechSynthesis.pause();
+        isSpeechPaused = true;
+        pauseIcon.setAttribute('data-lucide', 'play');
+        bars.forEach(bar => bar.style.animationPlayState = 'paused');
+      }
+      lucide.createIcons();
+    }
+
+    function stopSpeaking() {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+      document.getElementById('voice-toast').classList.add('hidden');
+      isSpeechPaused = false;
+    }
+
+    // 108HZ AUDIO AMBIENT GENERATOR WITH CSS VISUALS
+    function toggleAmbientAudio() {
+      const txt = document.getElementById('ambient-txt');
+      const btn = document.getElementById('ambient-btn');
+      const dot = document.getElementById('ambient-dot');
+
+      if (ambientPlaying) {
+        if (ambientSynth) {
+          ambientSynth.stop();
+          ambientSynth = null;
+        }
+        ambientPlaying = false;
+        txt.innerText = 'Ambiente: Off';
+        dot.classList.remove('bg-brand-400');
+        dot.classList.add('bg-slate-500');
+        dot.classList.remove('animate-ping');
+        btn.classList.remove('border-brand-500/40', 'text-brand-300', 'bg-brand-500/10');
+      } else {
+        try {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          const ctx = new AudioContext();
+
+          const osc1 = ctx.createOscillator();
+          const osc2 = ctx.createOscillator();
+          const gainNode = ctx.createGain();
+
+          osc1.type = 'sine';
+          // 108Hz: Alfa Brainwave target grounding frequency
+          osc1.frequency.setValueAtTime(108, ctx.currentTime);
+
+          osc2.type = 'triangle';
+          // Binaural beat: 114Hz creates 6Hz Theta waves for deep intuition
+          osc2.frequency.setValueAtTime(114, ctx.currentTime);
+
+          gainNode.gain.setValueAtTime(0.03, ctx.currentTime);
+
+          osc1.connect(gainNode);
+          osc2.connect(gainNode);
+          gainNode.connect(ctx.destination);
+
+          osc1.start();
+          osc2.start();
+
+          ambientSynth = {
+            stop: () => {
+              osc1.stop();
+              osc2.stop();
+              ctx.close();
+            }
+          };
+
+          ambientPlaying = true;
+          txt.innerText = 'Ambiente: On (108Hz)';
+          dot.classList.remove('bg-slate-500');
+          dot.classList.add('bg-brand-400');
+          dot.classList.add('animate-ping');
+          btn.classList.add('border-brand-500/40', 'text-brand-300', 'bg-brand-500/10');
+        } catch (e) {
+          txt.innerText = 'Ambiente: No Soportado';
+        }
+      }
+    }
+
+    function escapeQuotes(str) {
+      return str.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+    }
+  </script>
+</body>
+</html>
