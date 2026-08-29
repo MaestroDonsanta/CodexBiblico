@@ -624,8 +624,12 @@
   </div>
 
   <script>
+    // CLAVE API POR DEFECTO PARA EL PÚBLICO (Opción Híbrida)
+    // Pega tu clave de Gemini entre las comillas si deseas que funcione para todos automáticamente.
+    const DEFAULT_API_KEY = "AQ.Ab8RN6K8etoi_a6UlbhNSFTtiQ_cWAFuiEriAwsxGbONBZIDiQ"; 
+
     // Local API & Model Storage Management
-    let apiKey = localStorage.getItem('gemini_api_key') || "";
+    let apiKey = localStorage.getItem('gemini_api_key') || DEFAULT_API_KEY || "";
     let selectedModel = localStorage.getItem('gemini_model') || "gemini-3.6-flash";
     if (selectedModel === "gemini-2.5-flash") {
       selectedModel = "gemini-3.6-flash";
@@ -897,7 +901,8 @@
 
     function checkApiKeyConfig() {
       const warning = document.getElementById('api-key-warning');
-      if (!apiKey) {
+      const isKeyMissing = !apiKey || apiKey === "null" || apiKey === "undefined" || apiKey.trim() === "";
+      if (isKeyMissing) {
         warning.classList.remove('hidden');
       } else {
         warning.classList.add('hidden');
@@ -1223,7 +1228,8 @@ La consulta sobre **"${query}"** conecta directamente con los pasajes sapiencial
       }, 1500);
 
       // --- MOCK SIMULATOR MODE IF NO API KEY IS CONFIGURED ---
-      if (!apiKey) {
+      const isKeyMissing = !apiKey || apiKey === "null" || apiKey === "undefined" || apiKey.trim() === "";
+      if (isKeyMissing) {
         setTimeout(() => {
           clearInterval(loadingInterval);
           loading.classList.add('hidden');
@@ -1597,7 +1603,17 @@ Mantén un tono profesional, pragmático, respetuoso y secular.`;
 
     // SETTINGS MODAL HANDLERS
     function openSettingsModal() {
-      document.getElementById('input-api-key').value = apiKey;
+      // Show ONLY the user's custom key if they have saved one, otherwise leave blank to show placeholder
+      document.getElementById('input-api-key').value = localStorage.getItem('gemini_api_key') || "";
+      
+      // Update placeholder based on whether a default key is active
+      const keyInput = document.getElementById('input-api-key');
+      if (DEFAULT_API_KEY && DEFAULT_API_KEY.trim() !== "") {
+        keyInput.placeholder = "Usando clave predeterminada del creador";
+      } else {
+        keyInput.placeholder = "AIzaSy...";
+      }
+
       document.getElementById('select-model').value = (['gemini-3.6-flash', 'gemini-2.5-flash', 'gemini-1.5-flash', 'gemini-2.0-flash', 'gemini-1.5-pro'].includes(selectedModel)) ? selectedModel : 'custom';
       
       handleModelChange();
@@ -1641,10 +1657,10 @@ Mantén un tono profesional, pragmático, respetuoso y secular.`;
         finalModel = document.getElementById('input-custom-model').value.trim();
       }
 
-      apiKey = rawKey;
+      apiKey = rawKey || DEFAULT_API_KEY || "";
       selectedModel = finalModel || 'gemini-3.6-flash';
 
-      localStorage.setItem('gemini_api_key', apiKey);
+      localStorage.setItem('gemini_api_key', rawKey);
       localStorage.setItem('gemini_model', selectedModel);
 
       checkApiKeyConfig();
